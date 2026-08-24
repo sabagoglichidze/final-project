@@ -1,0 +1,261 @@
+<!doctype html>
+<html lang="ka">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>მოსაწვევი — Business Dashboard</title>
+<style>
+  :root{
+    --bg:#f3f0e9; --panel:#fbf9f4; --panel2:#f6f3ec; --ink:#1f1d1a; --ink2:#514c43; --muted:#867e70;
+    --line:#e2dccf; --brand:#8a3b4a; --brand2:#a98a4c; --ok:#2f7d55; --warn:#c08a2e;
+    --serif:'Noto Serif Georgian','Sylfaen','Iowan Old Style','Times New Roman',serif;
+    --sans:'Noto Sans Georgian','SF Pro Text','Helvetica Neue',system-ui,-apple-system,sans-serif;
+    --mono:'Noto Sans Mono','SFMono-Regular',ui-monospace,monospace;
+    --shadow:0 1px 2px rgba(30,25,15,.04),0 16px 36px -20px rgba(30,25,15,.3);
+  }
+  @media (prefers-color-scheme:dark){
+    :root{--bg:#151412;--panel:#1e1c19;--panel2:#232019;--ink:#efeade;--ink2:#c2bbac;--muted:#8f887b;
+      --line:#2d2a24;--brand:#c76b78;--brand2:#c9a45c;--shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -22px rgba(0,0,0,.7);}
+  }
+  :root[data-theme="dark"]{--bg:#151412;--panel:#1e1c19;--panel2:#232019;--ink:#efeade;--ink2:#c2bbac;--muted:#8f887b;
+    --line:#2d2a24;--brand:#c76b78;--brand2:#c9a45c;--shadow:0 1px 2px rgba(0,0,0,.4),0 18px 40px -22px rgba(0,0,0,.7);}
+  :root[data-theme="light"]{--bg:#f3f0e9;--panel:#fbf9f4;--panel2:#f6f3ec;--ink:#1f1d1a;--ink2:#514c43;--muted:#867e70;
+    --line:#e2dccf;--brand:#8a3b4a;--brand2:#a98a4c;--shadow:0 1px 2px rgba(30,25,15,.04),0 16px 36px -20px rgba(30,25,15,.3);}
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--sans);line-height:1.55;-webkit-font-smoothing:antialiased}
+  .wrap{max-width:1100px;margin:0 auto;padding:clamp(20px,4vw,44px) clamp(16px,4vw,36px) 80px}
+  a{color:var(--brand)}
+
+  header.top{display:flex;justify-content:space-between;align-items:flex-start;gap:16px;flex-wrap:wrap}
+  .badge{font-family:var(--mono);font-size:10.5px;letter-spacing:.2em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);border-radius:100px;padding:5px 12px}
+  .theme{border:1px solid var(--line);background:var(--panel);color:var(--muted);border-radius:100px;padding:8px 13px;font-size:12px;cursor:pointer;font-family:var(--mono)}
+  .theme:hover{color:var(--ink)}
+
+  h1.title{font-family:var(--serif);font-weight:600;font-size:clamp(30px,5vw,46px);margin:20px 0 0;line-height:1.05}
+  h1.title b{color:var(--brand)}
+  .oneliner{font-size:clamp(17px,2.4vw,21px);color:var(--ink2);max-width:60ch;margin:16px 0 0;font-family:var(--serif)}
+  .status{display:flex;gap:10px;flex-wrap:wrap;margin-top:20px;font-size:12.5px;color:var(--muted)}
+  .status span{display:inline-flex;align-items:center;gap:6px;background:var(--panel);border:1px solid var(--line);border-radius:100px;padding:6px 13px}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--warn)}
+
+  .sec{margin-top:52px}
+  .sec-h{display:flex;align-items:baseline;gap:12px;margin-bottom:18px}
+  .sec-h .k{font-family:var(--mono);font-size:12px;color:var(--brand2);letter-spacing:.1em}
+  .sec-h h2{font-family:var(--serif);font-weight:600;font-size:24px;margin:0}
+  .sec-h .line{flex:1;height:1px;background:var(--line)}
+
+  .grid{display:grid;gap:16px}
+  .g2{grid-template-columns:repeat(2,1fr)}
+  .g3{grid-template-columns:repeat(3,1fr)}
+  .g4{grid-template-columns:repeat(4,1fr)}
+  @media (max-width:820px){.g3,.g4{grid-template-columns:repeat(2,1fr)}}
+  @media (max-width:560px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;box-shadow:var(--shadow)}
+  .card h3{font-family:var(--serif);font-size:18px;margin:0 0 8px}
+  .card p{margin:0;color:var(--ink2);font-size:14.5px}
+  .card ul{margin:8px 0 0;padding-left:18px;color:var(--ink2);font-size:14px}
+  .card li{margin:5px 0}
+  .card .em{font-family:var(--mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);margin-bottom:10px;display:block}
+
+  /* flow */
+  .flow{display:flex;flex-wrap:wrap;gap:10px;align-items:stretch}
+  .step{flex:1;min-width:150px;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:18px;position:relative}
+  .step .n{width:26px;height:26px;border-radius:50%;background:var(--brand);color:#fff;display:grid;place-items:center;font-family:var(--mono);font-size:13px;margin-bottom:10px}
+  .step h4{margin:0 0 4px;font-size:15px}
+  .step p{margin:0;font-size:13px;color:var(--muted)}
+  .loop{margin-top:14px;background:linear-gradient(90deg,color-mix(in srgb,var(--brand) 12%,transparent),transparent);border:1px dashed color-mix(in srgb,var(--brand) 45%,transparent);border-radius:12px;padding:14px 18px;font-size:14px;color:var(--ink2)}
+  .loop b{color:var(--brand)}
+
+  /* categories */
+  .cats{display:flex;flex-wrap:wrap;gap:8px}
+  .cat{border:1px solid var(--line);background:var(--panel);border-radius:100px;padding:8px 14px;font-size:13.5px;display:inline-flex;gap:8px;align-items:center}
+  .cat .p{width:8px;height:8px;border-radius:50%}
+  .p.mvp{background:var(--ok)} .p.p3{background:var(--warn)} .p.later{background:var(--muted)}
+
+  /* pricing */
+  .price{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:24px}
+  .price.feat{border-color:var(--brand);box-shadow:0 0 0 1px var(--brand) inset,var(--shadow)}
+  .price .tier{font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--brand2)}
+  .price .amt{font-family:var(--serif);font-size:30px;font-weight:600;margin:8px 0 4px}
+  .price .amt small{font-size:14px;color:var(--muted);font-weight:400}
+  .price ul{margin:14px 0 0;padding-left:18px;font-size:13.5px;color:var(--ink2)}
+  .price li{margin:6px 0}
+
+  /* roadmap */
+  .road{display:grid;gap:0}
+  .phase{display:grid;grid-template-columns:auto 1fr;gap:16px;padding:14px 0;border-bottom:1px solid var(--line)}
+  .phase .pn{font-family:var(--mono);font-size:13px;color:var(--brand);width:70px}
+  .phase .done{color:var(--ok)}
+  .phase h4{margin:0 0 2px;font-size:15px}
+  .phase p{margin:0;font-size:13.5px;color:var(--muted)}
+
+  /* decisions */
+  table.dec{width:100%;border-collapse:collapse;font-size:14px}
+  table.dec th,table.dec td{text-align:left;padding:11px 12px;border-bottom:1px solid var(--line)}
+  table.dec th{font-family:var(--mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);font-weight:400}
+  table.dec td:first-child{font-family:var(--mono);color:var(--brand2);width:48px}
+  .st{font-size:12px;font-family:var(--mono);padding:3px 9px;border-radius:100px;white-space:nowrap}
+  .st.open{background:color-mix(in srgb,var(--warn) 16%,transparent);color:var(--warn)}
+  .st.lean{background:color-mix(in srgb,var(--ok) 16%,transparent);color:var(--ok)}
+
+  footer{margin-top:56px;padding-top:22px;border-top:1px solid var(--line);color:var(--muted);font-size:13px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px}
+  footer a{font-family:var(--mono);font-size:12px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <header class="top">
+    <span class="badge">Business Dashboard · Internal</span>
+    <button class="theme" id="theme">☾ / ☀</button>
+  </header>
+
+  <h1 class="title">მოსაწვევი<b>.</b></h1>
+  <p class="oneliner">შექმენი ლამაზი, პერსონალური მოსაწვევი ღონისძიებისთვის რამდენიმე წუთში, გაუგზავნე
+    სტუმრებს ბმულით და მართე პასუხები ერთ ადგილას.</p>
+  <div class="status">
+    <span><i class="dot"></i> სტატუსი: იდეის ხვეწა</span>
+    <span>ვერსია v0.1</span>
+    <span>გუნდი: ნიკუშა · საბა</span>
+    <span>ბაზარი: 🇬🇪 საქართველო</span>
+  </div>
+
+  <!-- problem / solution -->
+  <section class="sec">
+    <div class="sec-h"><span class="k">01</span><h2>პრობლემა → გადაწყვეტა</h2><span class="line"></span></div>
+    <div class="grid g2">
+      <div class="card">
+        <span class="em">პრობლემა</span>
+        <ul>
+          <li>ქაღალდის მოსაწვევი — ძვირი, ნელი, ლოგისტიკურად რთული</li>
+          <li>სტუმრების პასუხების (RSVP) თვალყური ხელით — ქაოსი</li>
+          <li>Facebook / WhatsApp — არაელეგანტური, „იაფი" განცდა</li>
+          <li>ქართული, ლოკალიზებული ელეგანტური გადაწყვეტა არ არსებობს</li>
+        </ul>
+      </div>
+      <div class="card">
+        <span class="em">გადაწყვეტა</span>
+        <p>ვებ-პლატფორმა: სტუმარი ხსნის <b>სრულ პერსონალურ მინი-საიტს</b> (და არა უბრალო ბარათს) —
+        თავისი სახელით, დეტალებით, უკუთვლით, რუკითა და RSVP ფორმით.</p>
+        <ul>
+          <li>ორგანიზატორისთვის — სწრაფად, ლამაზად, სტრესის გარეშე</li>
+          <li>სტუმრისთვის — ყველა დეტალი ერთ ადგილას, ანგარიშის გარეშე</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- flow -->
+  <section class="sec">
+    <div class="sec-h"><span class="k">02</span><h2>მომხმარებლის ფლოუ</h2><span class="line"></span></div>
+    <div class="flow">
+      <div class="step"><div class="n">1</div><h4>აირჩიე</h4><p>ღონისძიება + თემფლეითი</p></div>
+      <div class="step"><div class="n">2</div><h4>შეავსე</h4><p>დეტალები, ტექსტი, ფოტო</p></div>
+      <div class="step"><div class="n">3</div><h4>ჩამოწერე</h4><p>სტუმრების სია</p></div>
+      <div class="step"><div class="n">4</div><h4>გააგზავნე</h4><p>ბმული: მეილი / SMS / კოპ.</p></div>
+      <div class="step"><div class="n">5</div><h4>მართე</h4><p>RSVP დაშბორდი</p></div>
+    </div>
+    <div class="loop">🔁 <b>Viral loop:</b> ყოველი სტუმარი, ვინც მოსაწვევს ხსნის → პოტენციური მომავალი
+      ორგანიზატორი. სტუმრის საიტზე CTA „შექმენი შენი მოსაწვევი" → ორგანული ზრდა.</div>
+  </section>
+
+  <!-- personas + market -->
+  <section class="sec">
+    <div class="sec-h"><span class="k">03</span><h2>მომხმარებელი & ბაზარი</h2><span class="line"></span></div>
+    <div class="grid g4">
+      <div class="card"><span class="em">👰 Host (მთავარი)</span><p>22–40, ქორწილს/წვეულებას გეგმავს. <b>ის იხდის.</b></p></div>
+      <div class="card"><span class="em">💼 Planner (B2B)</span><p>სააგენტო, ბევრი ივენთი. subscription. <em>(მოგვიანებით)</em></p></div>
+      <div class="card"><span class="em">🎉 Guest</span><p>ანგარიშის გარეშე. მთავარი <b>ზრდის ძრავა</b>.</p></div>
+      <div class="card"><span class="em">📊 ბაზარი</span><p>~20k ქორწილი/წელი 🇬🇪 + დაბ. დღეები, ივენთები. განმეორებადი.</p></div>
+    </div>
+  </section>
+
+  <!-- categories -->
+  <section class="sec">
+    <div class="sec-h"><span class="k">04</span><h2>ღონისძიების ტიპები</h2><span class="line"></span></div>
+    <div class="cats">
+      <span class="cat"><i class="p mvp"></i>ქორწილი <b>· MVP</b></span>
+      <span class="cat"><i class="p p3"></i>დაბადების დღე</span>
+      <span class="cat"><i class="p p3"></i>ივენთი</span>
+      <span class="cat"><i class="p p3"></i>ბავშვის სქესი</span>
+      <span class="cat"><i class="p later"></i>მალჩიშნიკი</span>
+      <span class="cat"><i class="p later"></i>დევუშნიკი</span>
+      <span class="cat"><i class="p later"></i>მეჯვარე</span>
+      <span class="cat"><i class="p later"></i>ვალენტინობა</span>
+      <span class="cat"><i class="p later"></i>დეითი</span>
+    </div>
+    <p style="color:var(--muted);font-size:13px;margin-top:12px">🟢 MVP · 🟡 Phase 3 · ⚪ მოგვიანებით — ვიწყებთ ქორწილით, ვშლით ქორწილის ეკოსისტემაზე.</p>
+  </section>
+
+  <!-- monetization -->
+  <section class="sec">
+    <div class="sec-h"><span class="k">05</span><h2>მონეტიზაცია <span style="font-size:12px;color:var(--warn);font-family:var(--mono)">· ჰიპოთეზა</span></h2><span class="line"></span></div>
+    <div class="grid g3">
+      <div class="price"><div class="tier">Free</div><div class="amt">0 ₾</div>
+        <ul><li>1 ივენთი</li><li>ბაზისური თემფლეითი</li><li>„made with" branding</li><li>≤30 სტუმარი</li></ul></div>
+      <div class="price feat"><div class="tier">Event · популярное</div><div class="amt">30–50 ₾ <small>/ ივენთი</small></div>
+        <ul><li>premium თემფლეითები</li><li>branding-ის მოხსნა</li><li>ულიმიტო სტუმრები</li><li>RSVP ანალიტიკა</li></ul></div>
+      <div class="price"><div class="tier">Planner</div><div class="amt">30–60 ₾ <small>/ თვე</small></div>
+        <ul><li>მრავალი ივენთი</li><li>საკუთარი ბრენდი</li><li>გუნდი</li><li>priority support</li></ul></div>
+    </div>
+    <p style="color:var(--muted);font-size:13px;margin-top:12px">+ დამატებით: SMS credits · designer-თემფლეითების marketplace · vendor partnerships.</p>
+  </section>
+
+  <!-- gtm -->
+  <section class="sec">
+    <div class="sec-h"><span class="k">06</span><h2>მარკეტინგი & ზრდა</h2><span class="line"></span></div>
+    <div class="grid g4">
+      <div class="card"><span class="em">📸 Social</span><p>Instagram / TikTok — თემფლეითების demo, before/after.</p></div>
+      <div class="card"><span class="em">🤝 Vendors</span><p>ფოტოგრაფი, დარბაზი, planner — partnership / affiliate.</p></div>
+      <div class="card"><span class="em">🔍 SEO</span><p>„ქორწილის მოსაწვევი ონლაინ", „ელ. მოსაწვევი".</p></div>
+      <div class="card"><span class="em">💌 Referral</span><p>Host იწვევს Host-ს ბონუსით. + viral loop.</p></div>
+    </div>
+  </section>
+
+  <!-- roadmap -->
+  <section class="sec">
+    <div class="sec-h"><span class="k">07</span><h2>Roadmap</h2><span class="line"></span></div>
+    <div class="road">
+      <div class="phase"><div class="pn done">Phase 0 ✅</div><div><h4>ბიზნეს იდეის ხვეწა</h4><p>ეს დაფა + არქიტექტურა + BUSINESS.md</p></div></div>
+      <div class="phase"><div class="pn">Phase 1</div><div><h4>MVP — ქორწილი</h4><p>editor + guest site + RSVP + dashboard</p></div></div>
+      <div class="phase"><div class="pn">Phase 2</div><div><h4>მონეტიზაცია</h4><p>გადახდები + premium + branding removal</p></div></div>
+      <div class="phase"><div class="pn">Phase 3</div><div><h4>გაფართოება</h4><p>დაბადების დღე, ივენთი, gender reveal</p></div></div>
+      <div class="phase"><div class="pn">Phase 4</div><div><h4>B2B & ზრდა</h4><p>planner dashboard, SMS, ანალიტიკა, referral</p></div></div>
+      <div class="phase"><div class="pn">Phase 5</div><div><h4>რეგიონი</h4><p>ლოკალიზაცია, ახალი ბაზრები</p></div></div>
+    </div>
+  </section>
+
+  <!-- decisions -->
+  <section class="sec">
+    <div class="sec-h"><span class="k">08</span><h2>ღია გადაწყვეტილებები</h2><span class="line"></span></div>
+    <table class="dec">
+      <tr><th>#</th><th>კითხვა</th><th>სტატუსი</th></tr>
+      <tr><td>D1</td><td>ბრენდის საბოლოო სახელი?</td><td><span class="st open">ღია</span></td></tr>
+      <tr><td>D2</td><td>მონეტიზაცია: per-event / subscription / mix?</td><td><span class="st open">ღია</span></td></tr>
+      <tr><td>D3</td><td>Launch-ზე უფასო თუ ფასიანი?</td><td><span class="st open">ღია</span></td></tr>
+      <tr><td>D4</td><td>პირველი სეგმენტი: ქორწილი თუ ფართო?</td><td><span class="st lean">→ ქორწილი</span></td></tr>
+      <tr><td>D5</td><td>ენა: ქართული თუ + ინგლისური?</td><td><span class="st open">ღია</span></td></tr>
+      <tr><td>D6</td><td>SMS ხარჯის მოდელი?</td><td><span class="st open">ღია</span></td></tr>
+      <tr><td>D7</td><td>თემფლეითები: in-house თუ marketplace?</td><td><span class="st open">ღია</span></td></tr>
+      <tr><td>D10</td><td>ტექ-სტეკი (React + Node + Postgres)?</td><td><span class="st lean">შემოთავაზება</span></td></tr>
+    </table>
+    <p style="color:var(--ink2);font-size:14px;margin-top:16px">📌 <b>შემდეგი ნაბიჯი:</b> ერთად გავიაროთ ეს სია → შევთანხმდეთ → გადავიდეთ Phase 1 კოდზე.</p>
+  </section>
+
+  <footer>
+    <span>მოსაწვევი · internal business dashboard · v0.1</span>
+    <a href="./BUSINESS.md">→ BUSINESS.md</a>
+  </footer>
+
+</div>
+<script>
+  document.getElementById('theme').addEventListener('click',function(){
+    var r=document.documentElement,c=r.getAttribute('data-theme');
+    if(!c)c=matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';
+    r.setAttribute('data-theme',c==='dark'?'light':'dark');
+  });
+</script>
+</body>
+</html>
