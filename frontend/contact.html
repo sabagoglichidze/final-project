@@ -1,574 +1,593 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
 
-  <!-- MaxAre favicon -->
-  <link rel="icon" type="image/png" href="../images/logo.png">
-  <link rel="shortcut icon" type="image/png" href="../images/logo.png">
-  <link rel="apple-touch-icon" href="../images/logo.png">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <meta name="description" content="Contact MaxAre about digital invitations, guest RSVP experiences, shared event memories and event solutions.">
-  <title>Contact — MaxAre</title>
+    <title>Contact | MaxAre</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script>
-    tailwind.config = {
-      theme: {
-        extend: {
-          colors: {
-            maxare: {
-              navy:"#243746",
-              navyDark:"#1B2A35",
-              blue:"#425B6B",
-              cream:"#F7F3ED",
-              beige:"#EDE5D9",
-              rose:"#C9A6A0",
-              roseDark:"#A9827C",
-              sage:"#A9B5A4",
-              text:"#26343D",
-              muted:"#6F7B82"
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="../images/logo.png">
+
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cream: "#F8F3EE",
+                        soft: "#F4E8E4",
+                        rose: "#C98F8F",
+                        roseDark: "#A96F70",
+                        brown: "#5E4A47",
+                        dark: "#302725",
+                        line: "#E7D8D3"
+                    },
+                    boxShadow: {
+                        soft: "0 15px 40px rgba(94, 74, 71, 0.10)"
+                    }
+                }
             }
-          },
-          fontFamily: {
-            sans:["Inter","ui-sans-serif","system-ui","sans-serif"],
-            serif:["Georgia","serif"]
-          },
-          boxShadow: {
-            soft:"0 20px 60px rgba(36,55,70,.10)",
-            card:"0 12px 35px rgba(36,55,70,.08)"
-          }
         }
-      }
-    }
-  </script>
+    </script>
 
-  <style>
-    html { scroll-behavior:smooth; }
-    body { background:#F7F3ED; color:#26343D; }
-    ::selection { background:#C9A6A0; color:#fff; }
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
 
-    .glass {
-      background:rgba(255,255,255,.78);
-      backdrop-filter:blur(18px);
-      -webkit-backdrop-filter:blur(18px);
-    }
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+        }
 
-    .gradient-text {
-      background:linear-gradient(90deg,#243746,#425B6B);
-      -webkit-background-clip:text;
-      background-clip:text;
-      color:transparent;
-    }
+        .glass {
+            background: rgba(255, 255, 255, 0.72);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
 
-    .field {
-      transition:border-color .2s ease, box-shadow .2s ease, background-color .2s ease;
-    }
+        .input-style {
+            width: 100%;
+            border: 1px solid #E7D8D3;
+            background: #FFFCFA;
+            border-radius: 14px;
+            padding: 14px 16px;
+            outline: none;
+            color: #302725;
+            transition: all 0.25s ease;
+        }
 
-    .field:focus {
-      outline:none;
-      border-color:#A9827C;
-      box-shadow:0 0 0 4px rgba(201,166,160,.18);
-      background:#fff;
-    }
+        .input-style:focus {
+            border-color: #C98F8F;
+            box-shadow: 0 0 0 4px rgba(201, 143, 143, 0.12);
+        }
 
-    .contact-card {
-      box-shadow:0 20px 60px rgba(36,55,70,.09);
-    }
+        .input-style::placeholder {
+            color: #A99A96;
+        }
 
-    .soft-grid {
-      background-image:
-        linear-gradient(rgba(36,55,70,.035) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(36,55,70,.035) 1px, transparent 1px);
-      background-size:34px 34px;
-    }
-  </style>
+        select.input-style {
+            cursor: pointer;
+        }
+    </style>
 </head>
 
-<body class="font-sans antialiased">
+<body class="bg-cream text-dark">
 
-  <!-- HEADER -->
-  <header class="fixed top-0 left-0 right-0 z-50">
-    <div class="max-w-7xl mx-auto px-5 lg:px-8 pt-4">
-      <nav class="glass border border-white/70 rounded-2xl shadow-sm px-5 py-3 flex items-center justify-between">
+    <!-- =========================
+         NAVIGATION
+    ========================== -->
+    <header class="sticky top-0 z-50 border-b border-line bg-cream/90 backdrop-blur-md">
 
-        <a href="index.html" class="flex items-center gap-3">
-          <img src="../images/logo.png" alt="MaxAre logo" class="w-11 h-11 object-contain">
-          <div class="leading-none">
-            <span class="text-xl font-semibold tracking-tight text-maxare-navy">MaxAre</span>
-            <span class="block text-[10px] uppercase tracking-[.22em] text-maxare-muted mt-1">
-              Moments made memorable
-            </span>
-          </div>
-        </a>
+        <nav class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 lg:px-10">
 
-        <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-          <a href="index.html" class="text-maxare-muted hover:text-maxare-navy transition">Home</a>
-          <a href="destinations.html" class="text-maxare-muted hover:text-maxare-navy transition">Destinations</a>
-          <a href="about.html" class="text-maxare-muted hover:text-maxare-navy transition">About</a>
-          <a href="contact.html" class="text-maxare-navy font-semibold">Contact</a>
-        </div>
-
-        <a href="index.html#how-it-works"
-           class="hidden sm:inline-flex rounded-xl bg-maxare-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-maxare-navyDark transition">
-          Get Started
-        </a>
-
-      </nav>
-    </div>
-  </header>
-
-  <main>
-
-    <!-- HERO -->
-    <section class="pt-32 lg:pt-36 pb-12 px-5 lg:px-8 soft-grid overflow-hidden">
-      <div class="max-w-7xl mx-auto">
-        <div class="max-w-3xl">
-          <p class="text-[11px] uppercase tracking-[.25em] font-semibold text-maxare-roseDark">
-            Contact MaxAre
-          </p>
-
-          <h1 class="mt-4 text-4xl sm:text-5xl lg:text-[58px] leading-[1.04] font-semibold tracking-tight text-maxare-navy">
-            Let’s make your next
-            <span class="gradient-text">moment memorable.</span>
-          </h1>
-
-          <p class="mt-5 max-w-2xl text-base sm:text-lg leading-8 text-maxare-muted">
-            Whether you are creating an invitation, planning an event, looking for a guest
-            experience, or interested in shared photo memories, tell us what you need.
-          </p>
-        </div>
-      </div>
-    </section>
-
-    <!-- CONTACT AREA -->
-    <section class="pb-20 px-5 lg:px-8">
-      <div class="max-w-7xl mx-auto">
-
-        <div class="grid lg:grid-cols-[.72fr_1.28fr] gap-7 lg:gap-10 items-start">
-
-          <!-- LEFT INFORMATION -->
-          <aside class="space-y-5">
-
-            <div class="bg-maxare-navy text-white rounded-[2rem] p-7 sm:p-8 contact-card">
-              <p class="text-[11px] uppercase tracking-[.22em] text-maxare-rose">
-                How can we help?
-              </p>
-
-              <h2 class="mt-3 text-2xl sm:text-3xl font-semibold leading-tight">
-                One platform.
-                <br>
-                Many ways to celebrate.
-              </h2>
-
-              <p class="mt-4 text-sm leading-7 text-white/65">
-                MaxAre connects digital invitations, guest RSVP, event access and shared
-                memories in one simple experience.
-              </p>
-
-              <div class="mt-7 space-y-4">
-
-                <div class="flex gap-4">
-                  <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                      <path d="M4 5h16v14H4z"/>
-                      <path d="m4 7 8 6 8-6"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-sm">Invitation support</p>
-                    <p class="mt-1 text-xs leading-5 text-white/55">
-                      Questions about creating or sharing your event invitation.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="flex gap-4">
-                  <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                      <circle cx="12" cy="8" r="3"/>
-                      <path d="M5 20c.8-3.5 3.1-5.5 7-5.5s6.2 2 7 5.5"/>
-                      <path d="m17 17 2 2 3-4"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-sm">Guest experience</p>
-                    <p class="mt-1 text-xs leading-5 text-white/55">
-                      Help with RSVP, access codes and guest participation.
-                    </p>
-                  </div>
-                </div>
-
-                <div class="flex gap-4">
-                  <div class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center shrink-0">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
-                         stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                      <rect x="3" y="4" width="18" height="16" rx="2"/>
-                      <circle cx="8.5" cy="9" r="1.5"/>
-                      <path d="m4 17 5-5 3.5 3.5 2.5-2.5 5 5"/>
-                    </svg>
-                  </div>
-                  <div>
-                    <p class="font-semibold text-sm">Shared memories</p>
-                    <p class="mt-1 text-xs leading-5 text-white/55">
-                      Questions about uploading, galleries and event photo storage.
-                    </p>
-                  </div>
-                </div>
-
-              </div>
-            </div>
-
-            <div class="bg-white rounded-[2rem] p-7 sm:p-8 border border-white shadow-card">
-              <p class="text-[11px] uppercase tracking-[.22em] text-maxare-roseDark font-semibold">
-                Event types
-              </p>
-
-              <h3 class="mt-3 text-xl font-semibold text-maxare-navy">
-                Tell us what you are planning.
-              </h3>
-
-              <div class="mt-5 flex flex-wrap gap-2">
-                <span class="px-3 py-2 rounded-xl bg-maxare-cream text-xs font-semibold text-maxare-navy">💍 Wedding</span>
-                <span class="px-3 py-2 rounded-xl bg-maxare-cream text-xs font-semibold text-maxare-navy">🎂 Birthday</span>
-                <span class="px-3 py-2 rounded-xl bg-maxare-cream text-xs font-semibold text-maxare-navy">👶 Baby Shower</span>
-                <span class="px-3 py-2 rounded-xl bg-maxare-cream text-xs font-semibold text-maxare-navy">❤️ Dating / Couple</span>
-                <span class="px-3 py-2 rounded-xl bg-maxare-cream text-xs font-semibold text-maxare-navy">🥂 Party</span>
-                <span class="px-3 py-2 rounded-xl bg-maxare-cream text-xs font-semibold text-maxare-navy">🤝 Reconciliation</span>
-                <span class="px-3 py-2 rounded-xl bg-maxare-cream text-xs font-semibold text-maxare-navy">🎉 Other</span>
-              </div>
-            </div>
-
-          </aside>
-
-          <!-- FORM -->
-          <div class="bg-white rounded-[2rem] p-6 sm:p-8 lg:p-10 contact-card border border-white">
-
-            <div class="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
-              <div>
-                <p class="text-[11px] uppercase tracking-[.22em] text-maxare-roseDark font-semibold">
-                  Send an inquiry
-                </p>
-                <h2 class="mt-2 text-2xl sm:text-3xl font-semibold text-maxare-navy">
-                  Tell us what you need.
-                </h2>
-              </div>
-
-              <span class="inline-flex w-fit items-center gap-2 px-3 py-2 rounded-full bg-maxare-sage/20 text-xs font-semibold text-maxare-navy">
-                <span class="w-2 h-2 rounded-full bg-maxare-sage"></span>
-                We’re here to help
-              </span>
-            </div>
-
-            <form id="contactForm" class="mt-8 space-y-5">
-
-              <!-- NAME + EMAIL -->
-              <div class="grid sm:grid-cols-2 gap-5">
-
-                <div>
-                  <label for="fullName" class="block text-xs font-semibold text-maxare-navy mb-2">
-                    Full Name <span class="text-maxare-roseDark">*</span>
-                  </label>
-                  <input
-                    id="fullName"
-                    name="fullName"
-                    type="text"
-                    autocomplete="name"
-                    required
-                    placeholder="e.g. Alex Morgan"
-                    class="field w-full rounded-xl border border-maxare-beige bg-maxare-cream/40 px-4 py-3.5 text-sm text-maxare-text placeholder:text-maxare-muted/65">
-                </div>
-
-                <div>
-                  <label for="email" class="block text-xs font-semibold text-maxare-navy mb-2">
-                    Email Address <span class="text-maxare-roseDark">*</span>
-                  </label>
-                  <input
-                    id="email"
-                    name="email"
-                    type="email"
-                    autocomplete="email"
-                    required
-                    placeholder="you@example.com"
-                    class="field w-full rounded-xl border border-maxare-beige bg-maxare-cream/40 px-4 py-3.5 text-sm text-maxare-text placeholder:text-maxare-muted/65">
-                </div>
-
-              </div>
-
-              <!-- ROLE + EVENT -->
-              <div class="grid sm:grid-cols-2 gap-5">
-
-                <div>
-                  <label for="role" class="block text-xs font-semibold text-maxare-navy mb-2">
-                    I am a...
-                  </label>
-                  <select
-                    id="role"
-                    name="role"
-                    class="field w-full rounded-xl border border-maxare-beige bg-maxare-cream/40 px-4 py-3.5 text-sm text-maxare-text">
-                    <option value="">Select one</option>
-                    <option>Event organizer</option>
-                    <option>Couple / host</option>
-                    <option>Guest / attendee</option>
-                    <option>Photographer / creator</option>
-                    <option>Business / event professional</option>
-                    <option>Other</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label for="eventType" class="block text-xs font-semibold text-maxare-navy mb-2">
-                    Event Type <span class="text-maxare-roseDark">*</span>
-                  </label>
-                  <select
-                    id="eventType"
-                    name="eventType"
-                    required
-                    class="field w-full rounded-xl border border-maxare-beige bg-maxare-cream/40 px-4 py-3.5 text-sm text-maxare-text">
-                    <option value="">Choose an event</option>
-                    <option>💍 Wedding</option>
-                    <option>🎂 Birthday</option>
-                    <option>👶 Baby Shower</option>
-                    <option>❤️ Dating / Couple</option>
-                    <option>🥂 Party</option>
-                    <option>🤝 Reconciliation</option>
-                    <option>🎉 Other Event</option>
-                  </select>
-                </div>
-
-              </div>
-
-              <!-- SUBJECT -->
-              <div>
-                <label for="subject" class="block text-xs font-semibold text-maxare-navy mb-2">
-                  What can we help with?
-                </label>
-                <select
-                  id="subject"
-                  name="subject"
-                  class="field w-full rounded-xl border border-maxare-beige bg-maxare-cream/40 px-4 py-3.5 text-sm text-maxare-text">
-                  <option value="">Select a topic</option>
-                  <option>Creating a digital invitation</option>
-                  <option>QR code / guest access</option>
-                  <option>Guest RSVP</option>
-                  <option>Photo & video uploads</option>
-                  <option>Shared event gallery</option>
-                  <option>Photo storage</option>
-                  <option>Business / partnership</option>
-                  <option>Something else</option>
-                </select>
-              </div>
-
-              <!-- EVENT DATE + GUEST COUNT -->
-              <div class="grid sm:grid-cols-2 gap-5">
-
-                <div>
-                  <label for="eventDate" class="block text-xs font-semibold text-maxare-navy mb-2">
-                    Event Date
-                  </label>
-                  <input
-                    id="eventDate"
-                    name="eventDate"
-                    type="date"
-                    class="field w-full rounded-xl border border-maxare-beige bg-maxare-cream/40 px-4 py-3.5 text-sm text-maxare-text">
-                </div>
-
-                <div>
-                  <label for="guestCount" class="block text-xs font-semibold text-maxare-navy mb-2">
-                    Approx. Guest Count
-                  </label>
-                  <select
-                    id="guestCount"
-                    name="guestCount"
-                    class="field w-full rounded-xl border border-maxare-beige bg-maxare-cream/40 px-4 py-3.5 text-sm text-maxare-text">
-                    <option value="">Select range</option>
-                    <option>1–20 guests</option>
-                    <option>21–50 guests</option>
-                    <option>51–100 guests</option>
-                    <option>101–200 guests</option>
-                    <option>201–500 guests</option>
-                    <option>500+ guests</option>
-                  </select>
-                </div>
-
-              </div>
-
-              <!-- MESSAGE -->
-              <div>
-                <label for="message" class="block text-xs font-semibold text-maxare-navy mb-2">
-                  Message / Comments <span class="text-maxare-roseDark">*</span>
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="6"
-                  required
-                  placeholder="Tell us about your event, what you want to create, or what you need help with..."
-                  class="field w-full resize-none rounded-xl border border-maxare-beige bg-maxare-cream/40 px-4 py-3.5 text-sm leading-6 text-maxare-text placeholder:text-maxare-muted/65"></textarea>
-              </div>
-
-              <!-- PREFERENCE -->
-              <div class="rounded-2xl bg-maxare-cream p-5">
-                <p class="text-xs font-semibold text-maxare-navy">What are you most interested in?</p>
-
-                <div class="mt-4 grid sm:grid-cols-2 gap-3">
-                  <label class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 cursor-pointer">
-                    <input type="checkbox" name="interest" value="Invitation" class="accent-[#243746]">
-                    <span class="text-sm text-maxare-text">Digital invitation</span>
-                  </label>
-
-                  <label class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 cursor-pointer">
-                    <input type="checkbox" name="interest" value="RSVP" class="accent-[#243746]">
-                    <span class="text-sm text-maxare-text">Guest RSVP</span>
-                  </label>
-
-                  <label class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 cursor-pointer">
-                    <input type="checkbox" name="interest" value="QR" class="accent-[#243746]">
-                    <span class="text-sm text-maxare-text">QR / event access</span>
-                  </label>
-
-                  <label class="flex items-center gap-3 rounded-xl bg-white px-4 py-3 cursor-pointer">
-                    <input type="checkbox" name="interest" value="Memories" class="accent-[#243746]">
-                    <span class="text-sm text-maxare-text">Photos & memories</span>
-                  </label>
-                </div>
-              </div>
-
-              <!-- SUBMIT -->
-              <div class="pt-1">
-                <button
-                  type="submit"
-                  class="w-full rounded-xl bg-maxare-navy px-6 py-4 text-sm font-semibold text-white hover:bg-maxare-navyDark transition shadow-lg shadow-maxare-navy/10">
-                  Send Inquiry
-                  <span class="ml-2">→</span>
-                </button>
-
-                <p class="mt-3 text-center text-[11px] leading-5 text-maxare-muted">
-                  This form is currently a frontend demo. It can later be connected to Google Forms,
-                  a backend API, or another submission service.
-                </p>
-
-                <p id="formMessage" class="hidden mt-4 rounded-xl bg-maxare-sage/20 px-4 py-3 text-center text-sm font-medium text-maxare-navy">
-                  Thank you — your inquiry has been prepared successfully.
-                </p>
-              </div>
-
-            </form>
-          </div>
-
-        </div>
-      </div>
-    </section>
-
-    <!-- SIMPLE FAQ / SUPPORT STRIP -->
-    <section class="py-20 bg-white px-5 lg:px-8">
-      <div class="max-w-7xl mx-auto">
-
-        <div class="grid lg:grid-cols-[.8fr_1.2fr] gap-10 items-center">
-
-          <div>
-            <p class="text-[11px] uppercase tracking-[.25em] font-semibold text-maxare-roseDark">
-              Before you send
-            </p>
-            <h2 class="mt-3 text-3xl sm:text-4xl font-semibold text-maxare-navy leading-tight">
-              Not sure where to start?
-            </h2>
-            <p class="mt-4 text-maxare-muted leading-7 max-w-xl">
-              Start with your event type. Whether it is a wedding, birthday, party or something
-              completely different, MaxAre is designed to adapt to the occasion.
-            </p>
-
-            <a href="index.html"
-               class="inline-flex mt-6 rounded-xl bg-maxare-navy px-5 py-3 text-sm font-semibold text-white hover:bg-maxare-navyDark transition">
-              Explore MaxAre
+            <!-- Logo -->
+            <a href="../index.html" class="flex items-center">
+                <img
+                    src="../images/logo.png"
+                    alt="MaxAre Logo"
+                    class="h-14 w-auto object-contain"
+                >
             </a>
-          </div>
 
-          <div class="grid sm:grid-cols-2 gap-4">
+            <!-- Desktop Navigation -->
+            <div class="hidden items-center gap-8 md:flex">
 
-            <div class="rounded-2xl bg-maxare-cream p-6">
-              <div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-maxare-navy">
-                <svg width="23" height="23" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="9"/>
-                  <path d="M12 8v4l2.5 2"/>
-                </svg>
-              </div>
-              <h3 class="mt-5 font-semibold text-maxare-navy">Planning an event?</h3>
-              <p class="mt-2 text-sm leading-6 text-maxare-muted">
-                Tell us your date, event type and approximate guest count.
-              </p>
+                <a
+                    href="../index.html"
+                    class="text-sm font-medium text-brown transition hover:text-roseDark"
+                >
+                    Home
+                </a>
+
+                <a
+                    href="about.html"
+                    class="text-sm font-medium text-brown transition hover:text-roseDark"
+                >
+                    About
+                </a>
+
+                <a
+                    href="contact.html"
+                    class="text-sm font-semibold text-roseDark"
+                >
+                    Contact
+                </a>
+
             </div>
 
-            <div class="rounded-2xl bg-maxare-beige/60 p-6">
-              <div class="w-11 h-11 rounded-xl bg-white flex items-center justify-center text-maxare-navy">
-                <svg width="23" height="23" viewBox="0 0 24 24" fill="none"
-                     stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
-                  <path d="M4 6h16v12H4z"/>
-                  <path d="M8 10h8M8 14h5"/>
-                </svg>
-              </div>
-              <h3 class="mt-5 font-semibold text-maxare-navy">Have a question?</h3>
-              <p class="mt-2 text-sm leading-6 text-maxare-muted">
-                Describe the issue or idea and include as much useful context as possible.
-              </p>
+            <!-- Mobile Menu Button -->
+            <button
+                id="menuButton"
+                class="rounded-xl border border-line bg-white px-3 py-2 text-brown md:hidden"
+                aria-label="Open menu"
+            >
+                ☰
+            </button>
+
+        </nav>
+
+        <!-- Mobile Navigation -->
+        <div
+            id="mobileMenu"
+            class="hidden border-t border-line bg-cream px-6 py-4 md:hidden"
+        >
+
+            <div class="flex flex-col gap-4">
+
+                <a
+                    href="../index.html"
+                    class="text-sm font-medium text-brown"
+                >
+                    Home
+                </a>
+
+                <a
+                    href="about.html"
+                    class="text-sm font-medium text-brown"
+                >
+                    About
+                </a>
+
+                <a
+                    href="contact.html"
+                    class="text-sm font-semibold text-roseDark"
+                >
+                    Contact
+                </a>
+
             </div>
 
-          </div>
         </div>
-      </div>
-    </section>
 
-  </main>
+    </header>
 
-  <!-- FOOTER -->
-  <footer class="bg-maxare-navy text-white px-5 lg:px-8 py-10">
-    <div class="max-w-7xl mx-auto flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
 
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="../images/logo.png" alt="MaxAre logo" class="w-10 h-10 object-contain">
-        <div>
-          <p class="font-semibold">MaxAre</p>
-          <p class="text-xs text-white/45 mt-1">Moments made memorable.</p>
+    <!-- =========================
+         HERO / INTRO
+    ========================== -->
+    <main>
+
+        <section class="px-6 pb-12 pt-16 lg:px-10 lg:pt-20">
+
+            <div class="mx-auto max-w-7xl">
+
+                <div class="max-w-3xl">
+
+                    <span
+                        class="mb-4 inline-flex rounded-full bg-soft px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-roseDark"
+                    >
+                        Contact MaxAre
+                    </span>
+
+                    <h1
+                        class="text-4xl font-semibold leading-tight tracking-tight text-dark sm:text-5xl"
+                    >
+                        Let's create something
+                        <span class="text-roseDark">special.</span>
+                    </h1>
+
+                    <p
+                        class="mt-6 max-w-2xl text-base leading-7 text-brown sm:text-lg"
+                    >
+                        Whether you're planning a wedding, birthday, baby shower,
+                        party or another special moment, tell us what you're looking
+                        for and we'll help you find the right MaxAre experience.
+                    </p>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================
+             CONTACT CONTENT
+        ========================== -->
+        <section class="px-6 pb-20 lg:px-10">
+
+            <div
+                class="mx-auto grid max-w-7xl gap-8 lg:grid-cols-[0.8fr_1.2fr]"
+            >
+
+                <!-- LEFT INFORMATION CARD -->
+                <aside>
+
+                    <div
+                        class="glass rounded-3xl border border-line p-7 shadow-soft lg:p-8"
+                    >
+
+                        <p
+                            class="text-sm font-semibold uppercase tracking-[0.15em] text-roseDark"
+                        >
+                            Tell us about it
+                        </p>
+
+                        <h2
+                            class="mt-3 text-2xl font-semibold text-dark"
+                        >
+                            Your event starts with an idea.
+                        </h2>
+
+                        <p
+                            class="mt-4 text-sm leading-7 text-brown"
+                        >
+                            MaxAre can be used for many different moments —
+                            from invitations and guest management to shared
+                            memories and event photo collections.
+                        </p>
+
+
+                        <!-- Event Types -->
+                        <div class="mt-8">
+
+                            <h3
+                                class="text-sm font-semibold text-dark"
+                            >
+                                Event types
+                            </h3>
+
+                            <div class="mt-4 grid grid-cols-1 gap-3">
+
+                                <div class="rounded-2xl bg-soft px-4 py-3 text-sm text-brown">
+                                    💍 Wedding
+                                </div>
+
+                                <div class="rounded-2xl bg-soft px-4 py-3 text-sm text-brown">
+                                    🎂 Birthday
+                                </div>
+
+                                <div class="rounded-2xl bg-soft px-4 py-3 text-sm text-brown">
+                                    👶 Baby Shower
+                                </div>
+
+                                <div class="rounded-2xl bg-soft px-4 py-3 text-sm text-brown">
+                                    ❤️ Dating / Couple
+                                </div>
+
+                                <div class="rounded-2xl bg-soft px-4 py-3 text-sm text-brown">
+                                    🥂 Party
+                                </div>
+
+                                <div class="rounded-2xl bg-soft px-4 py-3 text-sm text-brown">
+                                    🤝 Reconciliation
+                                </div>
+
+                                <div class="rounded-2xl bg-soft px-4 py-3 text-sm text-brown">
+                                    🎉 Other Events
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Small Info -->
+                        <div
+                            class="mt-8 rounded-2xl border border-line bg-white/70 p-5"
+                        >
+
+                            <p class="text-sm font-semibold text-dark">
+                                What happens next?
+                            </p>
+
+                            <p class="mt-2 text-sm leading-6 text-brown">
+                                Send your request and we'll use the information
+                                to understand your event and the experience
+                                you're looking to create.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </aside>
+
+
+                <!-- FORM -->
+                <div
+                    class="rounded-3xl border border-line bg-white p-7 shadow-soft lg:p-10"
+                >
+
+                    <div class="mb-8">
+
+                        <h2
+                            class="text-2xl font-semibold text-dark"
+                        >
+                            Contact / Inquiry
+                        </h2>
+
+                        <p
+                            class="mt-2 text-sm leading-6 text-brown"
+                        >
+                            Fill in the details below and tell us a little
+                            about your event.
+                        </p>
+
+                    </div>
+
+
+                    <form
+                        action="#"
+                        method="POST"
+                        class="space-y-6"
+                    >
+
+                        <!-- Full Name -->
+                        <div>
+
+                            <label
+                                for="fullName"
+                                class="mb-2 block text-sm font-semibold text-dark"
+                            >
+                                Full Name
+                            </label>
+
+                            <input
+                                id="fullName"
+                                name="fullName"
+                                type="text"
+                                autocomplete="name"
+                                required
+                                placeholder="e.g. Anna Smith"
+                                class="input-style"
+                            >
+
+                        </div>
+
+
+                        <!-- Email -->
+                        <div>
+
+                            <label
+                                for="email"
+                                class="mb-2 block text-sm font-semibold text-dark"
+                            >
+                                Email Address
+                            </label>
+
+                            <input
+                                id="email"
+                                name="email"
+                                type="email"
+                                autocomplete="email"
+                                required
+                                placeholder="e.g. anna@example.com"
+                                class="input-style"
+                            >
+
+                        </div>
+
+
+                        <!-- Event -->
+                        <div>
+
+                            <label
+                                for="eventType"
+                                class="mb-2 block text-sm font-semibold text-dark"
+                            >
+                                Destination / Event of Interest
+                            </label>
+
+                            <select
+                                id="eventType"
+                                name="eventType"
+                                required
+                                class="input-style"
+                            >
+
+                                <option value="" selected disabled>
+                                    Select an event type
+                                </option>
+
+                                <option value="wedding">
+                                    💍 Wedding
+                                </option>
+
+                                <option value="birthday">
+                                    🎂 Birthday
+                                </option>
+
+                                <option value="baby-shower">
+                                    👶 Baby Shower
+                                </option>
+
+                                <option value="dating-couple">
+                                    ❤️ Dating / Couple
+                                </option>
+
+                                <option value="party">
+                                    🥂 Party
+                                </option>
+
+                                <option value="reconciliation">
+                                    🤝 Reconciliation
+                                </option>
+
+                                <option value="other">
+                                    🎉 Other Events
+                                </option>
+
+                            </select>
+
+                        </div>
+
+
+                        <!-- Dates -->
+                        <div>
+
+                            <label
+                                class="mb-2 block text-sm font-semibold text-dark"
+                            >
+                                Event / Travel Dates
+                            </label>
+
+                            <div class="grid gap-4 sm:grid-cols-2">
+
+                                <div>
+
+                                    <label
+                                        for="arrival"
+                                        class="mb-2 block text-xs font-medium text-brown"
+                                    >
+                                        Arrival / Start Date
+                                    </label>
+
+                                    <input
+                                        id="arrival"
+                                        name="arrival"
+                                        type="date"
+                                        class="input-style"
+                                    >
+
+                                </div>
+
+
+                                <div>
+
+                                    <label
+                                        for="departure"
+                                        class="mb-2 block text-xs font-medium text-brown"
+                                    >
+                                        Departure / End Date
+                                    </label>
+
+                                    <input
+                                        id="departure"
+                                        name="departure"
+                                        type="date"
+                                        class="input-style"
+                                    >
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+
+                        <!-- Message -->
+                        <div>
+
+                            <label
+                                for="message"
+                                class="mb-2 block text-sm font-semibold text-dark"
+                            >
+                                Message / Comments
+                            </label>
+
+                            <textarea
+                                id="message"
+                                name="message"
+                                rows="6"
+                                required
+                                placeholder="Tell us about your event, guest experience, location, dates, or anything else you'd like us to know..."
+                                class="input-style resize-none"
+                            ></textarea>
+
+                        </div>
+
+
+                        <!-- Submit -->
+                        <div class="pt-2">
+
+                            <button
+                                type="submit"
+                                class="w-full rounded-2xl bg-rose px-6 py-4 text-sm font-semibold text-white shadow-sm transition duration-300 hover:-translate-y-0.5 hover:bg-roseDark hover:shadow-lg"
+                            >
+                                Send Inquiry
+                            </button>
+
+                        </div>
+
+                        <p
+                            class="text-center text-xs leading-5 text-brown"
+                        >
+                            By submitting this form, you are sending an inquiry
+                            to MaxAre. This form is currently prepared for
+                            future Google Forms or backend integration.
+                        </p>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================
+         FOOTER
+    ========================== -->
+    <footer class="border-t border-line bg-white/50">
+
+        <div
+            class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-4 px-6 py-8 text-center sm:flex-row sm:text-left lg:px-10"
+        >
+
+            <div class="flex items-center gap-3">
+
+                <img
+                    src="../images/logo.png"
+                    alt="MaxAre"
+                    class="h-10 w-auto"
+                >
+
+                <p class="text-xs text-brown">
+                    Digital invitations & memories
+                </p>
+
+            </div>
+
+            <p class="text-xs text-brown">
+                © 2026 MaxAre. All rights reserved.
+            </p>
+
         </div>
-      </a>
 
-      <div class="flex flex-wrap gap-x-6 gap-y-2 text-sm text-white/55">
-        <a href="index.html" class="hover:text-white transition">Home</a>
-        <a href="destinations.html" class="hover:text-white transition">Destinations</a>
-        <a href="about.html" class="hover:text-white transition">About</a>
-        <a href="contact.html" class="text-white">Contact</a>
-      </div>
+    </footer>
 
-      <p class="text-xs text-white/40">
-        © 2026 MaxAre. All rights reserved.
-      </p>
-    </div>
-  </footer>
 
-  <script>
-    const form = document.getElementById("contactForm");
-    const message = document.getElementById("formMessage");
+    <!-- =========================
+         MOBILE MENU SCRIPT
+    ========================== -->
+    <script>
 
-    form.addEventListener("submit", function (event) {
-      event.preventDefault();
+        const menuButton = document.getElementById("menuButton");
+        const mobileMenu = document.getElementById("mobileMenu");
 
-      if (!form.checkValidity()) {
-        form.reportValidity();
-        return;
-      }
+        menuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("hidden");
+        });
 
-      message.classList.remove("hidden");
-      form.reset();
-
-      setTimeout(() => {
-        message.classList.add("hidden");
-      }, 5000);
-    });
-  </script>
+    </script>
 
 </body>
 </html>

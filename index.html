@@ -1,416 +1,1631 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- MaxAre favicon -->
-<link rel="icon" type="image/png" href="../images/logo.png">
-<link rel="shortcut icon" type="image/png" href="../images/logo.png">
-<link rel="apple-touch-icon" href="../images/logo.png">
-<meta name="description" content="MaxAre — digital invitations, guest experiences and shared memories for every special event.">
-<title>MaxAre — Create. Invite. Celebrate. Remember.</title>
+    <meta charset="UTF-8">
 
-<script src="https://cdn.tailwindcss.com"></script>
-<script>
-tailwind.config = {
-  theme: {
-    extend: {
-      colors: {
-        maxare: {
-          navy:"#243746", navyDark:"#1B2A35", blue:"#425B6B",
-          cream:"#F7F3ED", beige:"#EDE5D9", rose:"#C9A6A0",
-          roseDark:"#A9827C", sage:"#A9B5A4", text:"#26343D", muted:"#6F7B82"
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>MaxAre — Create. Invite. Celebrate. Remember.</title>
+
+    <meta
+        name="description"
+        content="MaxAre is a digital platform for invitations, guest interaction, event access and shared memories."
+    >
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="images/logo.png">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        maxare: {
+                            cream: "#F7F2EA",
+                            ivory: "#FCFAF6",
+                            beige: "#E8DED0",
+                            sand: "#D8C8B8",
+
+                            brown: "#6B5143",
+                            dark: "#2F2925",
+
+                            rose: "#B98B8B",
+                            roseDark: "#956B6B",
+
+                            sage: "#8D9A8A",
+                            gold: "#B59A6A"
+                        }
+                    },
+
+                    fontFamily: {
+                        sans: [
+                            "Inter",
+                            "ui-sans-serif",
+                            "system-ui",
+                            "sans-serif"
+                        ],
+
+                        serif: [
+                            "Georgia",
+                            "Times New Roman",
+                            "serif"
+                        ]
+                    },
+
+                    boxShadow: {
+                        soft: "0 15px 40px rgba(75, 57, 47, 0.10)",
+                        card: "0 8px 25px rgba(75, 57, 47, 0.08)"
+                    }
+                }
+            }
+        };
+    </script>
+
+    <style>
+        html {
+            scroll-behavior: smooth;
         }
-      },
-      fontFamily:{ sans:["Inter","ui-sans-serif","system-ui","sans-serif"], serif:["Georgia","serif"] },
-      boxShadow:{ soft:"0 20px 60px rgba(36,55,70,.10)", card:"0 12px 35px rgba(36,55,70,.08)" }
-    }
-  }
-}
-</script>
 
-<style>
-html{scroll-behavior:smooth} body{background:#F7F3ED;color:#26343D}
-::selection{background:#C9A6A0;color:#fff}
-.glass{background:rgba(255,255,255,.78);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
-.event-item{transition:transform .22s ease,background-color .22s ease,color .22s ease,box-shadow .22s ease}
-.event-item:hover{transform:translateX(4px)}
-.event-item.active{background:#243746;color:#fff;box-shadow:0 12px 30px rgba(36,55,70,.18)}
-.event-item.active .event-description{color:rgba(255,255,255,.65)}
-.phone{box-shadow:0 35px 80px rgba(27,42,53,.22),inset 0 0 0 1px rgba(255,255,255,.08)}
-.gradient-text{background:linear-gradient(90deg,#243746,#425B6B);-webkit-background-clip:text;background-clip:text;color:transparent}
-.icon-box{width:52px;height:52px;border-radius:16px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
-.gallery-image{transition:transform .6s ease}.gallery-card:hover .gallery-image{transform:scale(1.045)}
-</style>
+        body {
+            background: #F7F2EA;
+            color: #2F2925;
+        }
+
+        /* Hide scrollbar while keeping scrolling */
+        .hide-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .hide-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        /* Event selection animation */
+        .event-item {
+            transition:
+                transform 0.25s ease,
+                background-color 0.25s ease,
+                border-color 0.25s ease,
+                box-shadow 0.25s ease;
+        }
+
+        .event-item:hover {
+            transform: translateX(5px);
+        }
+
+        .event-item.active {
+            background: #6B5143;
+            color: white;
+            border-color: #6B5143;
+            box-shadow: 0 10px 25px rgba(75, 57, 47, 0.16);
+        }
+
+        /* Image hover */
+        .hero-image {
+            transition: transform 0.6s ease;
+        }
+
+        .hero-image:hover {
+            transform: scale(1.025);
+        }
+
+        /* Phone */
+        .phone-frame {
+            position: relative;
+            width: 270px;
+            max-width: 80vw;
+            aspect-ratio: 9 / 18.5;
+            border-radius: 38px;
+            background: #1f1b19;
+            padding: 9px;
+            box-shadow:
+                0 25px 60px rgba(47, 41, 37, 0.25),
+                inset 0 0 0 1px rgba(255,255,255,0.08);
+        }
+
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            border-radius: 30px;
+            background: #000;
+            position: relative;
+        }
+
+        .phone-screen video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .phone-notch {
+            position: absolute;
+            top: 15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90px;
+            height: 24px;
+            border-radius: 20px;
+            background: #111;
+            z-index: 5;
+        }
+
+        /* Soft decorative circles */
+        .decor-circle {
+            position: absolute;
+            border-radius: 9999px;
+            pointer-events: none;
+            filter: blur(1px);
+        }
+
+        /* Mobile menu */
+        #mobileMenu {
+            display: none;
+        }
+
+        #mobileMenu.open {
+            display: block;
+        }
+    </style>
 </head>
 
-<body class="font-sans antialiased">
+<body class="font-sans">
 
-<header class="fixed top-0 left-0 right-0 z-50">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 pt-4">
-    <nav class="glass border border-white/70 rounded-2xl shadow-sm px-5 py-3 flex items-center justify-between">
-      <a href="index.html" class="flex items-center gap-3">
-        <img src="../images/logo.png" alt="MaxAre logo" class="w-11 h-11 object-contain">
-        <div class="leading-none">
-          <span class="text-xl font-semibold tracking-tight text-maxare-navy">MaxAre</span>
-          <span class="block text-[10px] uppercase tracking-[.22em] text-maxare-muted mt-1">Moments made memorable</span>
-        </div>
-      </a>
-      <div class="hidden md:flex items-center gap-8 text-sm font-medium">
-        <a href="index.html" class="text-maxare-navy">Home</a>
-        <a href="destinations.html" class="text-maxare-muted hover:text-maxare-navy transition">Destinations</a>
-        <a href="about.html" class="text-maxare-muted hover:text-maxare-navy transition">About</a>
-        <a href="contact.html" class="text-maxare-muted hover:text-maxare-navy transition">Contact</a>
-      </div>
-      <a href="#how-it-works" class="hidden sm:inline-flex rounded-xl bg-maxare-navy px-5 py-2.5 text-sm font-semibold text-white hover:bg-maxare-navyDark transition">Get Started</a>
-    </nav>
-  </div>
-</header>
+    <!-- =========================================================
+         HEADER
+    ========================================================== -->
 
-<main>
+    <header class="sticky top-0 z-50 bg-maxare-cream/90 backdrop-blur-md border-b border-maxare-beige">
 
-<section class="pt-32 pb-14 lg:pt-36 lg:pb-20 px-5 lg:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid lg:grid-cols-[.78fr_1.22fr] gap-8 lg:gap-12 items-stretch">
+        <div class="max-w-7xl mx-auto px-5 sm:px-8">
 
-      <div class="flex flex-col justify-center">
-        <div class="mb-5">
-          <p class="text-[11px] uppercase tracking-[.25em] font-semibold text-maxare-roseDark mb-2">Choose your event</p>
-          <h1 class="text-3xl sm:text-4xl lg:text-[42px] font-semibold tracking-tight text-maxare-navy leading-[1.06]">
-            One platform for <span class="gradient-text">every special moment.</span>
-          </h1>
-          <p class="mt-4 text-sm sm:text-[15px] leading-6 text-maxare-muted max-w-lg">
-            Create a digital invitation, connect with your guests, manage your event and collect the memories you make together.
-          </p>
-        </div>
+            <div class="h-20 flex items-center justify-between">
 
-        <div class="space-y-1.5">
-          <button data-event="Wedding" class="event-item active w-full rounded-2xl p-3 flex items-center gap-3 text-left">
-            <span class="w-10 h-10 rounded-xl bg-white/10 flex items-center justify-center text-lg shrink-0">💍</span>
-            <span><span class="block font-semibold text-sm">Wedding</span><span class="event-description block text-xs mt-0.5 text-white/65">ქორწილი</span></span>
-            <span class="ml-auto opacity-70">→</span>
-          </button>
-          <button data-event="Birthday" class="event-item w-full rounded-2xl p-3 flex items-center gap-3 text-left bg-white/55 border border-white/80">
-            <span class="w-10 h-10 rounded-xl bg-maxare-beige flex items-center justify-center text-lg shrink-0">🎂</span><span class="font-semibold text-sm text-maxare-navy">Birthday</span>
-          </button>
-          <button data-event="Baby Shower" class="event-item w-full rounded-2xl p-3 flex items-center gap-3 text-left bg-white/55 border border-white/80">
-            <span class="w-10 h-10 rounded-xl bg-maxare-beige flex items-center justify-center text-lg shrink-0">👶</span><span class="font-semibold text-sm text-maxare-navy">Baby Shower</span>
-          </button>
-          <button data-event="Dating / Couple" class="event-item w-full rounded-2xl p-3 flex items-center gap-3 text-left bg-white/55 border border-white/80">
-            <span class="w-10 h-10 rounded-xl bg-maxare-beige flex items-center justify-center text-lg shrink-0">❤️</span><span class="font-semibold text-sm text-maxare-navy">Dating / Couple</span>
-          </button>
-          <button data-event="Party" class="event-item w-full rounded-2xl p-3 flex items-center gap-3 text-left bg-white/55 border border-white/80">
-            <span class="w-10 h-10 rounded-xl bg-maxare-beige flex items-center justify-center text-lg shrink-0">🥂</span><span class="font-semibold text-sm text-maxare-navy">Party</span>
-          </button>
-          <button data-event="Reconciliation" class="event-item w-full rounded-2xl p-3 flex items-center gap-3 text-left bg-white/55 border border-white/80">
-            <span class="w-10 h-10 rounded-xl bg-maxare-beige flex items-center justify-center text-lg shrink-0">🤝</span>
-            <span><span class="block font-semibold text-sm text-maxare-navy">Reconciliation</span><span class="event-description block text-xs mt-0.5 text-maxare-muted">მეგობართან ან საყვარელ ადამიანთან შერიგება</span></span>
-          </button>
-          <button data-event="Other Events" class="event-item w-full rounded-2xl p-3 flex items-center gap-3 text-left bg-white/55 border border-white/80">
-            <span class="w-10 h-10 rounded-xl bg-maxare-beige flex items-center justify-center text-lg shrink-0">🎉</span>
-            <span><span class="block font-semibold text-sm text-maxare-navy">Other Events</span><span class="event-description block text-xs mt-0.5 text-maxare-muted">ნებისმიერი შეკრება ან ღონისძიება</span></span>
-          </button>
-        </div>
-      </div>
+                <!-- Logo -->
+                <a href="index.html" class="flex items-center">
+                    <img
+                        src="images/logo.png"
+                        alt="MaxAre Logo"
+                        class="h-12 w-auto object-contain"
+                    >
+                </a>
 
-      <div class="relative min-h-[610px] lg:min-h-[650px]">
-        <div class="absolute -top-8 -right-8 w-56 h-56 bg-maxare-rose/20 rounded-full blur-3xl"></div>
-        <div class="absolute -bottom-8 -left-8 w-56 h-56 bg-maxare-sage/20 rounded-full blur-3xl"></div>
-        <div class="relative h-full min-h-[610px] lg:min-h-[650px] overflow-hidden rounded-[2rem] bg-white shadow-soft border border-white">
-          <img src="../images/bride_0003.png" alt="Wedding celebration" class="absolute inset-0 w-full h-full object-cover">
-          <div class="absolute inset-0 bg-gradient-to-t from-maxare-navy/85 via-maxare-navy/10 to-transparent"></div>
-          <div class="absolute top-5 left-5">
-            <span class="inline-flex items-center gap-2 rounded-full bg-white/90 backdrop-blur px-4 py-2 text-xs font-semibold text-maxare-navy">
-              <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 12v8H4V4h10"/><path d="M14 4h6v6"/><path d="M20 4 11 13"/></svg>
-              Wedding Experience
-            </span>
-          </div>
-          <div class="absolute bottom-0 left-0 right-0 p-7 sm:p-9 text-white">
-            <p class="text-[10px] uppercase tracking-[.25em] text-white/70">A celebration to remember</p>
-            <h2 class="mt-2 text-4xl sm:text-5xl font-serif">Sophie & Lucas</h2>
-            <div class="flex flex-wrap gap-4 mt-3 text-sm text-white/80"><span>June 28, 2026</span><span>•</span><span>Tbilisi, Georgia</span></div>
-            <div class="mt-6 pt-5 border-t border-white/20 flex items-center justify-between gap-5">
-              <div><p class="text-[10px] uppercase tracking-[.2em] text-white/60">Your event</p><p class="mt-1 font-semibold text-sm">Invitation + Guest Experience</p></div>
-              <a href="#how-it-works" class="w-10 h-10 rounded-full bg-white text-maxare-navy flex items-center justify-center hover:bg-maxare-cream transition">→</a>
+                <!-- Desktop Navigation -->
+                <nav class="hidden md:flex items-center gap-8 text-sm font-medium">
+
+                    <a
+                        href="index.html"
+                        class="text-maxare-brown hover:text-maxare-roseDark transition"
+                    >
+                        Home
+                    </a>
+
+                    <a
+                        href="frontend/about.html"
+                        class="text-maxare-brown hover:text-maxare-roseDark transition"
+                    >
+                        About
+                    </a>
+
+                    <a
+                        href="frontend/contact.html"
+                        class="text-maxare-brown hover:text-maxare-roseDark transition"
+                    >
+                        Contact
+                    </a>
+
+                </nav>
+
+                <!-- Desktop CTA -->
+                <a
+                    href="frontend/contact.html"
+                    class="hidden md:inline-flex items-center justify-center
+                           px-5 py-2.5 rounded-full
+                           bg-maxare-brown text-white
+                           text-sm font-medium
+                           hover:bg-maxare-roseDark
+                           transition shadow-sm"
+                >
+                    Get Started
+                </a>
+
+                <!-- Mobile Button -->
+                <button
+                    id="mobileMenuButton"
+                    type="button"
+                    class="md:hidden p-2 rounded-lg text-maxare-brown"
+                    aria-label="Open menu"
+                >
+                    <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        width="25"
+                        height="25"
+                        viewBox="0 0 24 24"
+                        fill="none"
+                        stroke="currentColor"
+                        stroke-width="2"
+                    >
+                        <path d="M4 6h16"></path>
+                        <path d="M4 12h16"></path>
+                        <path d="M4 18h16"></path>
+                    </svg>
+                </button>
+
             </div>
-          </div>
-        </div>
-      </div>
 
-    </div>
-  </div>
-</section>
+            <!-- Mobile Navigation -->
+            <div id="mobileMenu" class="md:hidden pb-5">
 
-<section id="how-it-works" class="py-20 px-5 lg:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="max-w-2xl mb-10">
-      <p class="text-xs uppercase tracking-[.25em] font-semibold text-maxare-roseDark">Wedding example</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl font-semibold tracking-tight text-maxare-navy">From invitation to shared memories.</h2>
-      <p class="mt-4 text-maxare-muted leading-7">Four simple steps connect the organizer, guests and memories of the celebration.</p>
-    </div>
+                <div class="flex flex-col gap-3 text-sm">
 
-    <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-5">
+                    <a
+                        href="index.html"
+                        class="py-2 text-maxare-brown"
+                    >
+                        Home
+                    </a>
 
-      <article class="bg-white rounded-3xl p-6 shadow-card border border-white">
-        <div class="icon-box bg-maxare-cream text-maxare-navy">
-          <svg width="27" height="27" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/><path d="M16.5 3.5v4M14.5 5.5h4"/></svg>
-        </div>
-        <p class="mt-5 text-[11px] uppercase tracking-[.2em] text-maxare-roseDark font-semibold">01</p>
-        <h3 class="mt-1 text-lg font-semibold text-maxare-navy">Create invitation</h3>
-        <p class="mt-2 text-sm leading-6 text-maxare-muted">Add the date, location, dress code, gift preferences, schedule and every detail guests need.</p>
-      </article>
+                    <a
+                        href="frontend/about.html"
+                        class="py-2 text-maxare-brown"
+                    >
+                        About
+                    </a>
 
-      <article class="bg-white rounded-3xl p-6 shadow-card border border-white">
-        <div class="icon-box bg-maxare-navy text-white">
-          <svg width="29" height="29" viewBox="0 0 32 32" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M16 28s-10-5.8-10-14.1C6 9.5 8.7 6 12.5 6c1.9 0 3 1 3.5 2 .5-1 1.6-2 3.5-2C23.3 6 26 9.5 26 13.9 26 22.2 16 28 16 28Z"/><path d="M11 11h3v3h-3zM18 11h3v3h-3zM11 18h3v3h-3z"/><path d="M18 18h1M21 18v3h-3M21 21h2"/></svg>
-        </div>
-        <p class="mt-5 text-[11px] uppercase tracking-[.2em] text-maxare-roseDark font-semibold">02</p>
-        <h3 class="mt-1 text-lg font-semibold text-maxare-navy">Share QR</h3>
-        <p class="mt-2 text-sm leading-6 text-maxare-muted">Generate a unique heart-shaped QR code that can be printed or sent directly to guests.</p>
-      </article>
+                    <a
+                        href="frontend/contact.html"
+                        class="py-2 text-maxare-brown"
+                    >
+                        Contact
+                    </a>
 
-      <article class="bg-white rounded-3xl p-6 shadow-card border border-white">
-        <div class="icon-box bg-maxare-sage text-maxare-navy">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="9" cy="8" r="3"/><path d="M3.5 19c.7-3 2.5-4.5 5.5-4.5S13.8 16 14.5 19"/><path d="m15 16 2 2 4-5"/></svg>
-        </div>
-        <p class="mt-5 text-[11px] uppercase tracking-[.2em] text-maxare-roseDark font-semibold">03</p>
-        <h3 class="mt-1 text-lg font-semibold text-maxare-navy">Guest RSVP</h3>
-        <p class="mt-2 text-sm leading-6 text-maxare-muted">Guests confirm attendance, share useful details and receive a unique access code.</p>
-      </article>
+                    <a
+                        href="frontend/contact.html"
+                        class="mt-2 inline-flex justify-center
+                               px-5 py-3 rounded-full
+                               bg-maxare-brown text-white"
+                    >
+                        Get Started
+                    </a>
 
-      <article class="bg-white rounded-3xl p-6 shadow-card border border-white">
-        <div class="icon-box bg-maxare-beige text-maxare-navy">
-          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="8.5" cy="9" r="1.5"/><path d="m4 17 5-5 3.5 3.5 2.5-2.5 5 5"/></svg>
-        </div>
-        <p class="mt-5 text-[11px] uppercase tracking-[.2em] text-maxare-roseDark font-semibold">04</p>
-        <h3 class="mt-1 text-lg font-semibold text-maxare-navy">Collect memories</h3>
-        <p class="mt-2 text-sm leading-6 text-maxare-muted">Guests upload photos and videos to one shared gallery during the celebration.</p>
-      </article>
+                </div>
 
-    </div>
-  </div>
-</section>
+            </div>
 
-<section class="py-20 bg-maxare-navy text-white px-5 lg:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
-      <div>
-        <p class="text-xs uppercase tracking-[.25em] text-maxare-rose">Digital invitation</p>
-        <h2 class="mt-5 text-3xl sm:text-4xl lg:text-5xl font-semibold leading-tight">One scan connects everyone to the event.</h2>
-        <p class="mt-5 text-white/65 leading-8 max-w-xl">Guests open one invitation and find the event details, RSVP, access information and everything they need in one place.</p>
-        <div class="mt-7 space-y-4">
-          <div class="flex gap-4"><div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">✓</div><div><p class="font-semibold">Event information</p><p class="text-sm text-white/55 mt-1">Date, location, dress code, schedule and more.</p></div></div>
-          <div class="flex gap-4"><div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">✓</div><div><p class="font-semibold">Guest confirmation</p><p class="text-sm text-white/55 mt-1">Know who is coming before the celebration begins.</p></div></div>
-          <div class="flex gap-4"><div class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center shrink-0">✓</div><div><p class="font-semibold">Unique access</p><p class="text-sm text-white/55 mt-1">Confirmed guests can receive a unique event code.</p></div></div>
-        </div>
-      </div>
-      <div class="flex justify-center lg:justify-end">
-        <div class="relative w-full max-w-[410px]">
-          <div class="absolute inset-0 bg-maxare-rose/20 blur-3xl rounded-full"></div>
-          <div class="relative rounded-[2rem] bg-white p-4 shadow-2xl">
-            <img src="../images/qr_easel_scan__logonew.webp" alt="MaxAre heart QR invitation" class="w-full aspect-square object-contain rounded-[1.5rem]">
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="py-20 px-5 lg:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="max-w-2xl mb-10">
-      <p class="text-xs uppercase tracking-[.25em] font-semibold text-maxare-roseDark">Guest experience</p>
-      <h2 class="mt-3 text-3xl sm:text-4xl font-semibold text-maxare-navy">RSVP that works for both sides.</h2>
-      <p class="mt-4 text-maxare-muted leading-7">The guest gets a simple response flow while the organizer gets a clear, useful overview of attendance.</p>
-    </div>
-
-    <div class="grid lg:grid-cols-[1fr_.9fr] gap-7">
-      <div class="bg-white rounded-[2rem] p-7 sm:p-9 shadow-card border border-white">
-        <div class="flex items-start justify-between gap-5">
-          <div><p class="text-[11px] uppercase tracking-[.2em] text-maxare-muted">Guest response</p><h3 class="mt-2 text-2xl font-semibold text-maxare-navy">Wedding RSVP</h3></div>
-          <span class="px-3 py-1.5 rounded-full bg-maxare-sage/20 text-xs font-semibold text-maxare-navy">Confirmed</span>
         </div>
 
-        <div class="mt-7 grid sm:grid-cols-2 gap-5">
-          <div class="sm:col-span-2"><label class="text-xs font-semibold text-maxare-muted">Guest name</label><div class="mt-2 rounded-xl border border-maxare-beige px-4 py-3 text-sm">Alex Morgan</div></div>
-          <div class="sm:col-span-2"><label class="text-xs font-semibold text-maxare-muted">Will you attend?</label><div class="mt-2 grid grid-cols-2 gap-3"><div class="rounded-xl bg-maxare-navy text-white px-4 py-3 text-center text-sm font-semibold">Yes, I'll be there</div><div class="rounded-xl border border-maxare-beige px-4 py-3 text-center text-sm text-maxare-muted">Can't attend</div></div></div>
-          <div><label class="text-xs font-semibold text-maxare-muted">Guests</label><div class="mt-2 rounded-xl border border-maxare-beige px-4 py-3 text-sm">2 guests</div></div>
-          <div><label class="text-xs font-semibold text-maxare-muted">Dietary preference</label><div class="mt-2 rounded-xl border border-maxare-beige px-4 py-3 text-sm">No special request</div></div>
-          <div class="sm:col-span-2"><label class="text-xs font-semibold text-maxare-muted">Message</label><div class="mt-2 rounded-xl border border-maxare-beige px-4 py-3 text-sm text-maxare-muted">Looking forward to celebrating with you!</div></div>
-        </div>
-        <button class="mt-6 w-full rounded-xl bg-maxare-navy text-white py-3.5 text-sm font-semibold hover:bg-maxare-navyDark transition">Confirm RSVP</button>
-      </div>
+    </header>
 
-      <div class="bg-maxare-cream rounded-[2rem] p-7 sm:p-9 border border-white">
-        <p class="text-[11px] uppercase tracking-[.2em] text-maxare-muted">Organizer dashboard</p>
-        <h3 class="mt-2 text-2xl font-semibold text-maxare-navy">Guest overview</h3>
 
-        <div class="mt-7 grid grid-cols-2 gap-3">
-          <div class="bg-white rounded-2xl p-5"><p class="text-xs text-maxare-muted">Confirmed</p><p class="mt-2 text-3xl font-semibold text-maxare-navy">86</p><p class="mt-1 text-xs text-maxare-sage font-semibold">+8 this week</p></div>
-          <div class="bg-white rounded-2xl p-5"><p class="text-xs text-maxare-muted">Pending</p><p class="mt-2 text-3xl font-semibold text-maxare-navy">14</p><p class="mt-1 text-xs text-maxare-muted">Awaiting response</p></div>
-          <div class="bg-white rounded-2xl p-5"><p class="text-xs text-maxare-muted">Not attending</p><p class="mt-2 text-3xl font-semibold text-maxare-navy">7</p><p class="mt-1 text-xs text-maxare-muted">Confirmed declines</p></div>
-          <div class="bg-white rounded-2xl p-5"><p class="text-xs text-maxare-muted">Total responses</p><p class="mt-2 text-3xl font-semibold text-maxare-navy">107</p><p class="mt-1 text-xs text-maxare-muted">Out of 120 invited</p></div>
-        </div>
+    <!-- =========================================================
+         HERO
+    ========================================================== -->
 
-        <div class="mt-5 bg-white rounded-2xl p-5">
-          <div class="flex items-center justify-between"><p class="text-sm font-semibold text-maxare-navy">Attendance progress</p><p class="text-xs text-maxare-muted">86 / 120</p></div>
-          <div class="mt-4 h-2.5 rounded-full bg-maxare-beige overflow-hidden"><div class="h-full rounded-full bg-maxare-navy" style="width:71.6%"></div></div>
-        </div>
+    <main>
 
-        <div class="mt-5 bg-maxare-navy text-white rounded-2xl p-5">
-          <p class="text-xs uppercase tracking-[.18em] text-white/50">Guest access code</p>
-          <div class="mt-3 flex items-center justify-between"><span class="font-mono tracking-[.3em] font-semibold">MAX-2847</span><span class="w-9 h-9 rounded-xl bg-white/10 flex items-center justify-center">✓</span></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+        <section class="relative overflow-hidden">
 
-<section class="py-20 bg-maxare-beige/60 px-5 lg:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="grid lg:grid-cols-2 gap-14 items-center">
-      <div class="flex justify-center order-2 lg:order-1">
-        <div class="phone relative w-[275px] sm:w-[305px] h-[560px] sm:h-[620px] rounded-[3rem] bg-maxare-navy p-3">
-          <div class="absolute top-3 left-1/2 -translate-x-1/2 w-28 h-6 bg-black rounded-full z-20"></div>
-          <div class="relative w-full h-full rounded-[2.4rem] overflow-hidden bg-black">
-            <video
-              id="memoryVideo"
-              class="absolute inset-0 w-full h-full object-cover"
-              autoplay
-              muted
-              loop
-              playsinline
-              preload="auto"
-              poster="../images/IMG_2079.png"
-              aria-label="MaxAre photo upload demonstration video"
+            <!-- Decorative background elements -->
+            <div
+                class="decor-circle w-72 h-72 bg-maxare-beige/40 -top-24 -right-24"
+            ></div>
+
+            <div
+                class="decor-circle w-52 h-52 bg-maxare-rose/10 bottom-0 left-[-80px]"
+            ></div>
+
+
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 py-14 lg:py-16">
+
+                <!-- Intro -->
+                <div class="max-w-3xl mx-auto text-center mb-10">
+
+                    <span
+                        class="inline-flex items-center px-4 py-1.5 rounded-full
+                               bg-white/70 border border-maxare-beige
+                               text-xs font-semibold tracking-wider uppercase
+                               text-maxare-brown"
+                    >
+                        Digital Events & Memories
+                    </span>
+
+                    <h1
+                        class="mt-5 text-4xl sm:text-5xl lg:text-6xl
+                               font-serif font-semibold
+                               text-maxare-dark leading-tight"
+                    >
+                        One platform for
+                        <span class="text-maxare-roseDark">
+                            every special moment.
+                        </span>
+                    </h1>
+
+                    <p
+                        class="mt-5 text-base sm:text-lg
+                               text-maxare-brown/80
+                               max-w-2xl mx-auto leading-relaxed"
+                    >
+                        Create your digital invitation, connect with your
+                        guests and turn the moments of your event into
+                        shared memories.
+                    </p>
+
+                </div>
+
+
+                <!-- =====================================================
+                     EVENT SELECTOR + WEDDING EXAMPLE
+                ====================================================== -->
+
+                <div
+                    class="grid lg:grid-cols-[270px_1fr]
+                           gap-7 lg:gap-9
+                           items-stretch"
+                >
+
+                    <!-- LEFT: Event List -->
+                    <div
+                        class="bg-maxare-ivory/80
+                               border border-maxare-beige
+                               rounded-3xl
+                               p-5
+                               shadow-card"
+                    >
+
+                        <div class="mb-5">
+
+                            <p
+                                class="text-xs font-semibold uppercase
+                                       tracking-wider
+                                       text-maxare-roseDark"
+                            >
+                                Choose your event
+                            </p>
+
+                            <h2
+                                class="mt-1 text-xl font-serif font-semibold
+                                       text-maxare-dark"
+                            >
+                                What are you celebrating?
+                            </h2>
+
+                        </div>
+
+
+                        <div class="space-y-2">
+
+                            <button
+                                type="button"
+                                class="event-item active w-full text-left
+                                       border border-transparent
+                                       rounded-2xl px-4 py-3.5
+                                       flex items-center gap-3"
+                                data-event="Wedding"
+                            >
+                                <span class="text-xl">💍</span>
+
+                                <span>
+                                    <span class="block font-semibold">
+                                        Wedding
+                                    </span>
+
+                                    <span class="block text-xs opacity-75">
+                                        ქორწილი
+                                    </span>
+                                </span>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="event-item w-full text-left
+                                       bg-white/60
+                                       border border-maxare-beige
+                                       rounded-2xl px-4 py-3.5
+                                       flex items-center gap-3
+                                       text-maxare-dark"
+                                data-event="Birthday"
+                            >
+                                <span class="text-xl">🎂</span>
+
+                                <span>
+                                    <span class="block font-semibold">
+                                        Birthday
+                                    </span>
+
+                                    <span class="block text-xs text-maxare-brown/60">
+                                        დაბადების დღე
+                                    </span>
+                                </span>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="event-item w-full text-left
+                                       bg-white/60
+                                       border border-maxare-beige
+                                       rounded-2xl px-4 py-3.5
+                                       flex items-center gap-3
+                                       text-maxare-dark"
+                                data-event="Baby Shower"
+                            >
+                                <span class="text-xl">👶</span>
+
+                                <span>
+                                    <span class="block font-semibold">
+                                        Baby Shower
+                                    </span>
+                                </span>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="event-item w-full text-left
+                                       bg-white/60
+                                       border border-maxare-beige
+                                       rounded-2xl px-4 py-3.5
+                                       flex items-center gap-3
+                                       text-maxare-dark"
+                                data-event="Dating / Couple"
+                            >
+                                <span class="text-xl">❤️</span>
+
+                                <span>
+                                    <span class="block font-semibold">
+                                        Dating / Couple
+                                    </span>
+                                </span>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="event-item w-full text-left
+                                       bg-white/60
+                                       border border-maxare-beige
+                                       rounded-2xl px-4 py-3.5
+                                       flex items-center gap-3
+                                       text-maxare-dark"
+                                data-event="Party"
+                            >
+                                <span class="text-xl">🥂</span>
+
+                                <span>
+                                    <span class="block font-semibold">
+                                        Party
+                                    </span>
+                                </span>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="event-item w-full text-left
+                                       bg-white/60
+                                       border border-maxare-beige
+                                       rounded-2xl px-4 py-3.5
+                                       flex items-center gap-3
+                                       text-maxare-dark"
+                                data-event="Reconciliation"
+                            >
+                                <span class="text-xl">🤝</span>
+
+                                <span>
+                                    <span class="block font-semibold">
+                                        Reconciliation
+                                    </span>
+
+                                    <span class="block text-xs text-maxare-brown/60">
+                                        შერიგება
+                                    </span>
+                                </span>
+                            </button>
+
+
+                            <button
+                                type="button"
+                                class="event-item w-full text-left
+                                       bg-white/60
+                                       border border-maxare-beige
+                                       rounded-2xl px-4 py-3.5
+                                       flex items-center gap-3
+                                       text-maxare-dark"
+                                data-event="Other Events"
+                            >
+                                <span class="text-xl">🎉</span>
+
+                                <span>
+                                    <span class="block font-semibold">
+                                        Other Events
+                                    </span>
+
+                                    <span class="block text-xs text-maxare-brown/60">
+                                        ნებისმიერი ღონისძიება
+                                    </span>
+                                </span>
+                            </button>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- RIGHT: Wedding Example -->
+                    <div
+                        class="relative overflow-hidden
+                               rounded-3xl
+                               min-h-[520px]
+                               lg:min-h-full
+                               bg-maxare-brown
+                               shadow-soft"
+                    >
+
+                        <img
+                            src="images/bride_0003.png"
+                            alt="Wedding event example"
+                            class="hero-image absolute inset-0
+                                   w-full h-full object-cover"
+                        >
+
+                        <!-- Image overlay -->
+                        <div
+                            class="absolute inset-0
+                                   bg-gradient-to-t
+                                   from-black/65
+                                   via-black/15
+                                   to-transparent"
+                        ></div>
+
+
+                        <!-- Content -->
+                        <div
+                            class="relative z-10 h-full min-h-[520px]
+                                   flex flex-col justify-end
+                                   p-7 sm:p-9 lg:p-11"
+                        >
+
+                            <div class="max-w-xl">
+
+                                <span
+                                    class="inline-flex items-center gap-2
+                                           px-3.5 py-1.5 rounded-full
+                                           bg-white/90
+                                           text-xs font-semibold
+                                           text-maxare-brown"
+                                >
+                                    💍 Wedding Example
+                                </span>
+
+                                <h2
+                                    class="mt-4 text-3xl sm:text-4xl
+                                           lg:text-5xl
+                                           font-serif font-semibold
+                                           text-white leading-tight"
+                                >
+                                    Everything your guests
+                                    need in one place.
+                                </h2>
+
+                                <p
+                                    class="mt-4 text-sm sm:text-base
+                                           text-white/85
+                                           leading-relaxed
+                                           max-w-lg"
+                                >
+                                    Build a beautiful invitation, share it
+                                    through a heart-shaped QR code and let
+                                    your guests respond before the big day.
+                                </p>
+
+
+                                <div class="mt-6 flex flex-wrap gap-3">
+
+                                    <a
+                                        href="frontend/contact.html"
+                                        class="inline-flex items-center
+                                               justify-center
+                                               px-6 py-3
+                                               rounded-full
+                                               bg-white
+                                               text-maxare-brown
+                                               font-semibold text-sm
+                                               hover:bg-maxare-cream
+                                               transition"
+                                    >
+                                        Create an Invitation
+                                    </a>
+
+                                    <a
+                                        href="#how-it-works"
+                                        class="inline-flex items-center
+                                               justify-center
+                                               px-6 py-3
+                                               rounded-full
+                                               border border-white/50
+                                               bg-white/10
+                                               backdrop-blur-sm
+                                               text-white
+                                               font-semibold text-sm
+                                               hover:bg-white/20
+                                               transition"
+                                    >
+                                        See How It Works
+                                    </a>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================================
+             FEATURES
+        ========================================================== -->
+
+        <section
+            id="how-it-works"
+            class="bg-maxare-ivory border-y border-maxare-beige"
+        >
+
+            <div class="max-w-7xl mx-auto px-5 sm:px-8 py-16 lg:py-20">
+
+                <div class="text-center max-w-2xl mx-auto">
+
+                    <span
+                        class="text-xs font-semibold uppercase
+                               tracking-wider
+                               text-maxare-roseDark"
+                    >
+                        Simple experience
+                    </span>
+
+                    <h2
+                        class="mt-2 text-3xl sm:text-4xl
+                               font-serif font-semibold
+                               text-maxare-dark"
+                    >
+                        Create. Invite. Celebrate. Remember.
+                    </h2>
+
+                    <p
+                        class="mt-4 text-maxare-brown/75
+                               leading-relaxed"
+                    >
+                        MaxAre connects the invitation and the memories
+                        created during your event into one simple experience.
+                    </p>
+
+                </div>
+
+
+                <div
+                    class="mt-12 grid sm:grid-cols-2 lg:grid-cols-4
+                           gap-5"
+                >
+
+                    <!-- Feature 1 -->
+                    <div
+                        class="bg-white rounded-3xl
+                               border border-maxare-beige
+                               p-6 shadow-card
+                               hover:-translate-y-1
+                               transition"
+                    >
+
+                        <div
+                            class="w-12 h-12 rounded-2xl
+                                   bg-maxare-rose/15
+                                   flex items-center justify-center
+                                   text-2xl"
+                        >
+                            ✨
+                        </div>
+
+                        <h3
+                            class="mt-5 text-lg font-semibold
+                                   text-maxare-dark"
+                        >
+                            Create invitation
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm
+                                   text-maxare-brown/70
+                                   leading-relaxed"
+                        >
+                            Build a personalized digital invitation
+                            for your event.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 2 -->
+                    <div
+                        class="bg-white rounded-3xl
+                               border border-maxare-beige
+                               p-6 shadow-card
+                               hover:-translate-y-1
+                               transition"
+                    >
+
+                        <div
+                            class="w-12 h-12 rounded-2xl
+                                   bg-maxare-gold/15
+                                   flex items-center justify-center
+                                   text-2xl"
+                        >
+                            💗
+                        </div>
+
+                        <h3
+                            class="mt-5 text-lg font-semibold
+                                   text-maxare-dark"
+                        >
+                            Share QR
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm
+                                   text-maxare-brown/70
+                                   leading-relaxed"
+                        >
+                            Generate a unique heart-shaped QR code
+                            to share with your guests.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 3 -->
+                    <div
+                        class="bg-white rounded-3xl
+                               border border-maxare-beige
+                               p-6 shadow-card
+                               hover:-translate-y-1
+                               transition"
+                    >
+
+                        <div
+                            class="w-12 h-12 rounded-2xl
+                                   bg-maxare-sage/15
+                                   flex items-center justify-center
+                                   text-2xl"
+                        >
+                            ✓
+                        </div>
+
+                        <h3
+                            class="mt-5 text-lg font-semibold
+                                   text-maxare-dark"
+                        >
+                            Guest RSVP
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm
+                                   text-maxare-brown/70
+                                   leading-relaxed"
+                        >
+                            Guests can respond to invitations and
+                            receive their unique event access code.
+                        </p>
+
+                    </div>
+
+
+                    <!-- Feature 4 -->
+                    <div
+                        class="bg-white rounded-3xl
+                               border border-maxare-beige
+                               p-6 shadow-card
+                               hover:-translate-y-1
+                               transition"
+                    >
+
+                        <div
+                            class="w-12 h-12 rounded-2xl
+                                   bg-maxare-brown/10
+                                   flex items-center justify-center
+                                   text-2xl"
+                        >
+                            📸
+                        </div>
+
+                        <h3
+                            class="mt-5 text-lg font-semibold
+                                   text-maxare-dark"
+                        >
+                            Collect memories
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm
+                                   text-maxare-brown/70
+                                   leading-relaxed"
+                        >
+                            Guests can upload photos and create
+                            a shared event memory gallery.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================================
+             DIGITAL INVITATION / QR
+        ========================================================== -->
+
+        <section class="bg-maxare-cream">
+
+            <div
+                class="max-w-7xl mx-auto px-5 sm:px-8
+                       py-16 lg:py-20"
             >
-              <source src="../images/uploadExplain.mp4" type="video/mp4">
-              <source src="../images/uploadExplain.mp4" type="video/quicktime">
-              Your browser does not support HTML5 video.
-            </video>
-            <div class="absolute bottom-0 left-0 right-0 p-5 bg-gradient-to-t from-black/75 to-transparent text-white pointer-events-none">
-              <p class="text-[10px] uppercase tracking-[.2em] text-white/70">MaxAre Memories</p>
-              <p class="mt-1 font-semibold">Upload your moment</p>
+
+                <div
+                    class="grid lg:grid-cols-2
+                           gap-10 lg:gap-16
+                           items-center"
+                >
+
+                    <!-- Text -->
+                    <div>
+
+                        <span
+                            class="text-xs font-semibold uppercase
+                                   tracking-wider
+                                   text-maxare-roseDark"
+                        >
+                            Step 01
+                        </span>
+
+                        <h2
+                            class="mt-3 text-3xl sm:text-4xl
+                                   font-serif font-semibold
+                                   text-maxare-dark"
+                        >
+                            Digital Invitation / QR
+                        </h2>
+
+                        <p
+                            class="mt-5 text-base
+                                   text-maxare-brown/75
+                                   leading-relaxed"
+                        >
+                            Create your event invitation and share it
+                            effortlessly. MaxAre generates a unique
+                            heart-shaped QR code that can be printed,
+                            sent digitally or shared with your guests.
+                        </p>
+
+
+                        <div class="mt-7 space-y-4">
+
+                            <div class="flex gap-4">
+
+                                <div
+                                    class="flex-shrink-0 w-10 h-10
+                                           rounded-full
+                                           bg-white
+                                           border border-maxare-beige
+                                           flex items-center justify-center
+                                           text-maxare-brown font-semibold"
+                                >
+                                    1
+                                </div>
+
+                                <div>
+
+                                    <h3 class="font-semibold text-maxare-dark">
+                                        Build your invitation
+                                    </h3>
+
+                                    <p class="mt-1 text-sm text-maxare-brown/65">
+                                        Add your event details, location,
+                                        dress code and preferences.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex gap-4">
+
+                                <div
+                                    class="flex-shrink-0 w-10 h-10
+                                           rounded-full
+                                           bg-white
+                                           border border-maxare-beige
+                                           flex items-center justify-center
+                                           text-maxare-brown font-semibold"
+                                >
+                                    2
+                                </div>
+
+                                <div>
+
+                                    <h3 class="font-semibold text-maxare-dark">
+                                        Generate your QR
+                                    </h3>
+
+                                    <p class="mt-1 text-sm text-maxare-brown/65">
+                                        Receive a unique QR code for your event.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+
+                            <div class="flex gap-4">
+
+                                <div
+                                    class="flex-shrink-0 w-10 h-10
+                                           rounded-full
+                                           bg-white
+                                           border border-maxare-beige
+                                           flex items-center justify-center
+                                           text-maxare-brown font-semibold"
+                                >
+                                    3
+                                </div>
+
+                                <div>
+
+                                    <h3 class="font-semibold text-maxare-dark">
+                                        Share with guests
+                                    </h3>
+
+                                    <p class="mt-1 text-sm text-maxare-brown/65">
+                                        Print it or send it directly to
+                                        your guests.
+                                    </p>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- QR Image -->
+                    <div class="flex justify-center">
+
+                        <div
+                            class="bg-white rounded-[2rem]
+                                   border border-maxare-beige
+                                   p-5 sm:p-7
+                                   shadow-soft
+                                   max-w-md w-full"
+                        >
+
+                            <img
+                                src="images/qr_easel_scan__logonew.webp"
+                                alt="MaxAre heart shaped QR code"
+                                class="w-full rounded-2xl object-contain"
+                            >
+
+                            <div class="text-center mt-5">
+
+                                <p
+                                    class="font-serif text-xl
+                                           text-maxare-dark"
+                                >
+                                    Your event is one scan away.
+                                </p>
+
+                                <p
+                                    class="mt-1 text-sm
+                                           text-maxare-brown/60"
+                                >
+                                    A beautiful invitation.
+                                    A simple experience.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
             </div>
-          </div>
+
+        </section>
+
+
+        <!-- =========================================================
+             GUEST RSVP + PHOTO UPLOAD VIDEO
+        ========================================================== -->
+
+        <section
+            class="bg-maxare-brown
+                   text-white overflow-hidden"
+        >
+
+            <div
+                class="max-w-7xl mx-auto px-5 sm:px-8
+                       py-16 lg:py-20"
+            >
+
+                <div
+                    class="grid lg:grid-cols-[1fr_400px]
+                           gap-12 lg:gap-20
+                           items-center"
+                >
+
+                    <!-- Text -->
+                    <div>
+
+                        <span
+                            class="text-xs font-semibold uppercase
+                                   tracking-wider
+                                   text-maxare-sand"
+                        >
+                            Step 02
+                        </span>
+
+                        <h2
+                            class="mt-3 text-3xl sm:text-4xl
+                                   lg:text-5xl
+                                   font-serif font-semibold"
+                        >
+                            Guest RSVP & Photo Upload
+                        </h2>
+
+                        <p
+                            class="mt-5 text-white/75
+                                   leading-relaxed max-w-xl"
+                        >
+                            The experience doesn't stop after the
+                            invitation. Guests can respond to the event,
+                            receive their unique access code and later
+                            upload the moments they captured during
+                            the celebration.
+                        </p>
+
+
+                        <div class="mt-8 grid sm:grid-cols-2 gap-5">
+
+                            <div
+                                class="rounded-2xl
+                                       border border-white/10
+                                       bg-white/5
+                                       p-5"
+                            >
+
+                                <div class="text-2xl">✓</div>
+
+                                <h3 class="mt-3 font-semibold">
+                                    RSVP
+                                </h3>
+
+                                <p class="mt-1 text-sm text-white/60">
+                                    Guests confirm whether they can attend.
+                                </p>
+
+                            </div>
+
+
+                            <div
+                                class="rounded-2xl
+                                       border border-white/10
+                                       bg-white/5
+                                       p-5"
+                            >
+
+                                <div class="text-2xl">🔐</div>
+
+                                <h3 class="mt-3 font-semibold">
+                                    Unique access
+                                </h3>
+
+                                <p class="mt-1 text-sm text-white/60">
+                                    Each approved guest receives a unique code.
+                                </p>
+
+                            </div>
+
+
+                            <div
+                                class="rounded-2xl
+                                       border border-white/10
+                                       bg-white/5
+                                       p-5"
+                            >
+
+                                <div class="text-2xl">📱</div>
+
+                                <h3 class="mt-3 font-semibold">
+                                    Upload photos
+                                </h3>
+
+                                <p class="mt-1 text-sm text-white/60">
+                                    Guests can quickly upload photos
+                                    from their phones.
+                                </p>
+
+                            </div>
+
+
+                            <div
+                                class="rounded-2xl
+                                       border border-white/10
+                                       bg-white/5
+                                       p-5"
+                            >
+
+                                <div class="text-2xl">📺</div>
+
+                                <h3 class="mt-3 font-semibold">
+                                    Live memories
+                                </h3>
+
+                                <p class="mt-1 text-sm text-white/60">
+                                    Uploaded photos can become a shared
+                                    event slideshow.
+                                </p>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
+
+                    <!-- Phone Mockup -->
+                    <div class="flex justify-center">
+
+                        <div class="text-center">
+
+                            <div class="phone-frame mx-auto">
+
+                                <div class="phone-screen">
+
+                                    <div class="phone-notch"></div>
+
+                                    <video
+                                        autoplay
+                                        muted
+                                        loop
+                                        playsinline
+                                        preload="metadata"
+                                        class="w-full h-full object-cover scale-[0.93]"
+                                    >
+                                        <source
+                                            src="images/phoneExplain.mp4"
+                                            type="video/mp4"
+                                        >
+
+                                        Your browser does not support
+                                        the video tag.
+                                    </video>
+
+                                </div>
+
+                            </div>
+
+                            <p
+                                class="mt-5 text-sm
+                                       text-white/60"
+                            >
+                                See how easy it is to upload
+                                your event photos.
+                            </p>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================================
+             MEMORY STORAGE
+        ========================================================== -->
+
+        <section class="bg-maxare-ivory">
+
+            <div
+                class="max-w-7xl mx-auto px-5 sm:px-8
+                       py-16 lg:py-20"
+            >
+
+                <div
+                    class="grid md:grid-cols-3 gap-5"
+                >
+
+                    <div
+                        class="md:col-span-3 text-center
+                               max-w-2xl mx-auto mb-5"
+                    >
+
+                        <span
+                            class="text-xs font-semibold uppercase
+                                   tracking-wider
+                                   text-maxare-roseDark"
+                        >
+                            Beyond the event
+                        </span>
+
+                        <h2
+                            class="mt-3 text-3xl sm:text-4xl
+                                   font-serif font-semibold
+                                   text-maxare-dark"
+                        >
+                            Your memories, together.
+                        </h2>
+
+                        <p
+                            class="mt-4 text-maxare-brown/70
+                                   leading-relaxed"
+                        >
+                            Photos collected during the event can become
+                            a shared digital memory space that guests can
+                            revisit and download.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="bg-white rounded-3xl
+                               border border-maxare-beige
+                               p-7 shadow-card"
+                    >
+
+                        <div class="text-3xl">📸</div>
+
+                        <h3
+                            class="mt-5 text-xl font-semibold
+                                   text-maxare-dark"
+                        >
+                            Shared gallery
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm
+                                   text-maxare-brown/65
+                                   leading-relaxed"
+                        >
+                            Everyone can contribute their favorite
+                            moments to one shared collection.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="bg-white rounded-3xl
+                               border border-maxare-beige
+                               p-7 shadow-card"
+                    >
+
+                        <div class="text-3xl">⬇️</div>
+
+                        <h3
+                            class="mt-5 text-xl font-semibold
+                                   text-maxare-dark"
+                        >
+                            Easy downloads
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm
+                                   text-maxare-brown/65
+                                   leading-relaxed"
+                        >
+                            Guests can easily view and download
+                            photos shared by others.
+                        </p>
+
+                    </div>
+
+
+                    <div
+                        class="bg-white rounded-3xl
+                               border border-maxare-beige
+                               p-7 shadow-card"
+                    >
+
+                        <div class="text-3xl">☁️</div>
+
+                        <h3
+                            class="mt-5 text-xl font-semibold
+                                   text-maxare-dark"
+                        >
+                            Temporary storage
+                        </h3>
+
+                        <p
+                            class="mt-2 text-sm
+                                   text-maxare-brown/65
+                                   leading-relaxed"
+                        >
+                            Event memories can be stored for a limited
+                            period, with the option to extend storage.
+                        </p>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+
+        <!-- =========================================================
+             CTA
+        ========================================================== -->
+
+        <section class="bg-maxare-cream">
+
+            <div
+                class="max-w-5xl mx-auto px-5 sm:px-8
+                       py-16 lg:py-20 text-center"
+            >
+
+                <div
+                    class="bg-white
+                           rounded-[2rem]
+                           border border-maxare-beige
+                           shadow-soft
+                           px-6 py-12 sm:px-10"
+                >
+
+                    <h2
+                        class="text-3xl sm:text-4xl
+                               font-serif font-semibold
+                               text-maxare-dark"
+                    >
+                        Ready to create your event?
+                    </h2>
+
+                    <p
+                        class="mt-4 max-w-xl mx-auto
+                               text-maxare-brown/70
+                               leading-relaxed"
+                    >
+                        Start with your invitation and let MaxAre
+                        take care of the experience around it.
+                    </p>
+
+                    <div
+                        class="mt-7 flex flex-wrap
+                               justify-center gap-3"
+                    >
+
+                        <a
+                            href="frontend/contact.html"
+                            class="inline-flex items-center
+                                   justify-center
+                                   px-7 py-3.5
+                                   rounded-full
+                                   bg-maxare-brown
+                                   text-white
+                                   font-semibold
+                                   hover:bg-maxare-roseDark
+                                   transition"
+                        >
+                            Get Started
+                        </a>
+
+                        <a
+                            href="frontend/about.html"
+                            class="inline-flex items-center
+                                   justify-center
+                                   px-7 py-3.5
+                                   rounded-full
+                                   border border-maxare-beige
+                                   text-maxare-brown
+                                   font-semibold
+                                   hover:bg-maxare-cream
+                                   transition"
+                        >
+                            Learn More
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </section>
+
+    </main>
+
+
+    <!-- =========================================================
+         FOOTER
+    ========================================================== -->
+
+    <footer
+        class="bg-maxare-dark
+               text-white"
+    >
+
+        <div
+            class="max-w-7xl mx-auto px-5 sm:px-8
+                   py-10"
+        >
+
+            <div
+                class="flex flex-col md:flex-row
+                       items-center justify-between
+                       gap-6"
+            >
+
+                <div class="flex items-center gap-3">
+
+                    <img
+                        src="images/logo.png"
+                        alt="MaxAre"
+                        class="w-10 h-10 object-contain"
+                    >
+
+                </div>
+
+
+                <div
+                    class="flex items-center gap-6
+                           text-sm text-white/65"
+                >
+
+                    <a
+                        href="index.html"
+                        class="hover:text-white transition"
+                    >
+                        Home
+                    </a>
+
+                    <a
+                        href="frontend/about.html"
+                        class="hover:text-white transition"
+                    >
+                        About
+                    </a>
+
+                    <a
+                        href="frontend/contact.html"
+                        class="hover:text-white transition"
+                    >
+                        Contact
+                    </a>
+
+                </div>
+
+            </div>
+
+
+            <div
+                class="mt-8 pt-6
+                       border-t border-white/10
+                       text-center text-xs
+                       text-white/40"
+            >
+                © <span id="currentYear"></span> MaxAre.
+                Create. Invite. Celebrate. Remember.
+            </div>
+
         </div>
-      </div>
 
-      <div class="order-1 lg:order-2">
-        <p class="text-xs uppercase tracking-[.25em] font-semibold text-maxare-roseDark">Capture the moment</p>
-        <h2 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold tracking-tight text-maxare-navy">Your guests become part of the story.</h2>
-        <p class="mt-5 text-maxare-muted leading-8 max-w-xl">During the celebration, guests can use their phones to upload photos and videos directly to the event space.</p>
+    </footer>
 
-        <div class="mt-8 space-y-5">
-          <div class="flex gap-4"><div class="icon-box w-11 h-11 bg-white text-maxare-navy shadow-sm"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h4l1.5-2h5L16 7h4v12H4z"/><circle cx="12" cy="13" r="3.5"/></svg></div><div><h3 class="font-semibold text-maxare-navy">Upload instantly</h3><p class="mt-1 text-sm leading-6 text-maxare-muted">Guests can upload photos and videos directly from their phones.</p></div></div>
-          <div class="flex gap-4"><div class="icon-box w-11 h-11 bg-white text-maxare-navy shadow-sm"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 9 4-3 4 4 3-2 7 5"/></svg></div><div><h3 class="font-semibold text-maxare-navy">Live slideshow</h3><p class="mt-1 text-sm leading-6 text-maxare-muted">Shared photos can become part of a live slideshow on a TV.</p></div></div>
-          <div class="flex gap-4"><div class="icon-box w-11 h-11 bg-white text-maxare-navy shadow-sm"><svg width="23" height="23" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M4 21h16"/></svg></div><div><h3 class="font-semibold text-maxare-navy">Share & download</h3><p class="mt-1 text-sm leading-6 text-maxare-muted">Guests can browse and download memories from the shared gallery.</p></div></div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
 
-<section class="py-20 px-5 lg:px-8">
-  <div class="max-w-7xl mx-auto">
-    <div class="flex flex-col sm:flex-row sm:items-end justify-between gap-5 mb-8">
-      <div><p class="text-xs uppercase tracking-[.25em] font-semibold text-maxare-roseDark">Shared memories</p><h2 class="mt-3 text-3xl sm:text-4xl font-semibold text-maxare-navy">Everyone's view of the day.</h2></div>
-      <p class="max-w-md text-sm leading-6 text-maxare-muted">One event gallery brings together the moments captured by every guest.</p>
-    </div>
-    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
-      <div class="gallery-card col-span-2 row-span-2 rounded-3xl overflow-hidden h-[420px] bg-maxare-beige"><img src="../images/IMG_2079.png" alt="Wedding memory" class="gallery-image w-full h-full object-cover"></div>
-      <div class="gallery-card rounded-3xl overflow-hidden h-48 md:h-52 bg-maxare-beige"><img src="../images/IMG_2081.jpeg" alt="Wedding memory" class="gallery-image w-full h-full object-cover"></div>
-      <div class="gallery-card rounded-3xl overflow-hidden h-48 md:h-52 bg-maxare-beige"><img src="../images/11editorial_over_shoulder.webp" alt="Event memory" class="gallery-image w-full h-full object-cover"></div>
-      <div class="gallery-card rounded-3xl overflow-hidden h-48 md:h-52 bg-maxare-beige"><img src="../images/bride_0003.png" alt="Wedding memory" class="gallery-image w-full h-full object-cover"></div>
-      <div class="gallery-card rounded-3xl overflow-hidden h-48 md:h-52 bg-maxare-beige"><img src="../images/IMG_2079.png" alt="Event memory" class="gallery-image w-full h-full object-cover"></div>
-    </div>
-  </div>
-</section>
+    <!-- =========================================================
+         JAVASCRIPT
+    ========================================================== -->
 
-<section class="py-20 bg-white px-5 lg:px-8">
-  <div class="max-w-6xl mx-auto text-center">
-    <p class="text-xs uppercase tracking-[.25em] font-semibold text-maxare-roseDark">Memories after the event</p>
-    <h2 class="mt-4 text-3xl sm:text-4xl font-semibold text-maxare-navy">Keep the memories as long as you want.</h2>
-    <p class="mt-4 max-w-2xl mx-auto text-maxare-muted leading-7">Event photos can remain available for a defined period after the celebration. Storage can be extended when you want to keep the gallery longer.</p>
-    <div class="mt-10 grid md:grid-cols-3 gap-5 text-left">
-      <div class="rounded-3xl bg-maxare-cream p-7"><div class="icon-box bg-white text-maxare-navy"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M4 7h16v13H4z"/><path d="M7 7V4h10v3M8 11h8M8 15h6"/></svg></div><h3 class="mt-5 font-semibold text-lg text-maxare-navy">Event storage</h3><p class="mt-2 text-sm leading-6 text-maxare-muted">Your event gallery remains available after the celebration.</p></div>
-      <div class="rounded-3xl bg-maxare-cream p-7"><div class="icon-box bg-white text-maxare-navy"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></svg></div><h3 class="mt-5 font-semibold text-lg text-maxare-navy">Flexible duration</h3><p class="mt-2 text-sm leading-6 text-maxare-muted">Choose how long you want your event memories to remain accessible.</p></div>
-      <div class="rounded-3xl bg-maxare-cream p-7"><div class="icon-box bg-white text-maxare-navy"><svg width="25" height="25" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"><path d="M12 3v18M3 12h18"/><circle cx="12" cy="12" r="8"/></svg></div><h3 class="mt-5 font-semibold text-lg text-maxare-navy">Extend when needed</h3><p class="mt-2 text-sm leading-6 text-maxare-muted">Continue your storage beyond the initial period when you want.</p></div>
-    </div>
-  </div>
-</section>
+    <script>
 
-<section class="py-20 px-5 lg:px-8">
-  <div class="max-w-6xl mx-auto rounded-[2.5rem] bg-maxare-navy overflow-hidden relative">
-    <div class="absolute -right-24 -top-24 w-80 h-80 rounded-full bg-maxare-rose/20 blur-3xl"></div>
-    <div class="relative px-7 py-14 sm:px-12 lg:px-20 text-center">
-      <p class="text-xs uppercase tracking-[.25em] text-maxare-rose">Your moment starts here</p>
-      <h2 class="mt-4 text-3xl sm:text-4xl lg:text-5xl font-semibold text-white">Create something worth remembering.</h2>
-      <p class="mt-4 max-w-2xl mx-auto text-white/60 leading-7">Whether it's a wedding, birthday, party, new beginning or simply a moment worth celebrating — MaxAre brings everyone together.</p>
-      <div class="mt-8 flex flex-col sm:flex-row justify-center gap-3">
-        <a href="contact.html" class="inline-flex items-center justify-center rounded-xl bg-white px-7 py-3.5 text-sm font-semibold text-maxare-navy hover:bg-maxare-cream transition">Start with MaxAre</a>
-        <a href="about.html" class="inline-flex items-center justify-center rounded-xl border border-white/20 px-7 py-3.5 text-sm font-semibold text-white hover:bg-white/10 transition">Learn more</a>
-      </div>
-    </div>
-  </div>
-</section>
+        /* Current year */
+        document.getElementById("currentYear").textContent =
+            new Date().getFullYear();
 
-</main>
 
-<footer class="border-t border-maxare-beige bg-white">
-  <div class="max-w-7xl mx-auto px-5 lg:px-8 py-9">
-    <div class="flex flex-col md:flex-row items-center justify-between gap-5">
-      <div class="flex items-center gap-3">
-        <img src="../images/logo.png" alt="MaxAre" class="w-10 h-10 object-contain">
-        <div><p class="font-semibold text-maxare-navy">MaxAre</p><p class="text-xs text-maxare-muted mt-1">Create. Invite. Celebrate. Remember.</p></div>
-      </div>
-      <div class="flex items-center gap-6 text-sm text-maxare-muted">
-        <a href="index.html" class="hover:text-maxare-navy transition">Home</a>
-        <a href="about.html" class="hover:text-maxare-navy transition">About</a>
-        <a href="contact.html" class="hover:text-maxare-navy transition">Contact</a>
-      </div>
-      <p class="text-xs text-maxare-muted">© 2026 MaxAre. All rights reserved.</p>
-    </div>
-  </div>
-</footer>
+        /* Mobile menu */
+        const mobileMenuButton =
+            document.getElementById("mobileMenuButton");
 
-<script>
-const eventItems=document.querySelectorAll(".event-item");
-eventItems.forEach(item=>{
-  item.addEventListener("click",()=>{
-    eventItems.forEach(event=>{
-      event.classList.remove("active");
-      event.classList.add("bg-white/55","border","border-white/80");
-      const title=event.querySelector(".font-semibold");
-      if(title){title.classList.remove("text-white");title.classList.add("text-maxare-navy");}
-      const icon=event.querySelector("span.w-10");
-      if(icon){icon.classList.remove("bg-white/10");icon.classList.add("bg-maxare-beige");}
-    });
-    item.classList.add("active");
-    item.classList.remove("bg-white/55","border","border-white/80");
-    const title=item.querySelector(".font-semibold");
-    if(title){title.classList.remove("text-maxare-navy");title.classList.add("text-white");}
-    const icon=item.querySelector("span.w-10");
-    if(icon){icon.classList.remove("bg-maxare-beige");icon.classList.add("bg-white/10");}
-  });
-});
-// Keep the phone demo playing even when a browser initially delays autoplay.
-const memoryVideo = document.getElementById("memoryVideo");
-if (memoryVideo) {
-  memoryVideo.muted = true;
-  memoryVideo.setAttribute("muted", "");
-  memoryVideo.playsInline = true;
+        const mobileMenu =
+            document.getElementById("mobileMenu");
 
-  const playMemoryVideo = () => {
-    const promise = memoryVideo.play();
-    if (promise && typeof promise.catch === "function") promise.catch(() => {});
-  };
+        mobileMenuButton.addEventListener("click", () => {
+            mobileMenu.classList.toggle("open");
+        });
 
-  memoryVideo.addEventListener("loadeddata", playMemoryVideo);
-  memoryVideo.addEventListener("canplay", playMemoryVideo);
-  window.addEventListener("load", playMemoryVideo);
-}
-</script>
+
+        /* Close mobile menu after clicking a link */
+        document
+            .querySelectorAll("#mobileMenu a")
+            .forEach(link => {
+
+                link.addEventListener("click", () => {
+                    mobileMenu.classList.remove("open");
+                });
+
+            });
+
+
+        /* Event selector */
+        const eventButtons =
+            document.querySelectorAll(".event-item");
+
+        eventButtons.forEach(button => {
+
+            button.addEventListener("click", () => {
+
+                eventButtons.forEach(item => {
+                    item.classList.remove("active");
+
+                    item.classList.add(
+                        "bg-white/60",
+                        "border-maxare-beige",
+                        "text-maxare-dark"
+                    );
+
+                    item.classList.remove(
+                        "border-transparent"
+                    );
+                });
+
+
+                button.classList.add("active");
+
+                button.classList.remove(
+                    "bg-white/60",
+                    "border-maxare-beige",
+                    "text-maxare-dark"
+                );
+
+                button.classList.add(
+                    "border-transparent"
+                );
+
+                /*
+                    At the moment Wedding is the default example.
+                    The other events can later be connected to
+                    separate invitation templates/pages.
+                */
+
+            });
+
+        });
+
+    </script>
 
 </body>
 </html>
